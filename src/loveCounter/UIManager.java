@@ -135,7 +135,11 @@ public class UIManager {
 		layer.add(decrease, 2, 0);
 		layer.add(mainLayout, 1, 0);
 		
-		Scene coffeeScene = new Scene(layer);
+		StackPane realPane = new StackPane();
+		realPane.setAlignment(Pos.CENTER);
+		realPane.getChildren().addAll(layer, returnMenu());
+		
+		Scene coffeeScene = new Scene(realPane);
 		
 		return coffeeScene;
 	}
@@ -143,17 +147,31 @@ public class UIManager {
 	public Scene tripMenu() {
 		
 		GridPane layer = new GridPane();
+		layer.setVgap(20);
+		layer.setHgap(20);
+		layer.setAlignment(Pos.CENTER);
 		
 		StackPane mainLayout = new StackPane();
-		Rectangle mainRec = new Rectangle();
-		Label mainLab = new Label();
+		Rectangle mainRec = new Rectangle(200, 200);
+		Label mainLab = new Label("Trip");
 		
 		Button increase = new Button("+");
 		Button decrease = new Button("-");
 		
+		setButtonSizes(increase);
+		setButtonSizes(decrease);
 		
+		mainLayout.getChildren().addAll(mainRec, mainLab);
 		
-		Scene tripScene = new Scene(layer);
+		layer.add(increase, 0, 0);
+		layer.add(decrease, 2, 0);
+		layer.add(mainLayout, 1, 0);
+		
+		StackPane realPane = new StackPane();
+		realPane.setAlignment(Pos.CENTER);
+		realPane.getChildren().addAll(layer, returnMenu());
+		
+		Scene tripScene = new Scene(realPane);
 		
 		return tripScene;
 	}
@@ -161,17 +179,31 @@ public class UIManager {
 	public Scene catMenu() {
 		
 		GridPane layer = new GridPane();
+		layer.setVgap(20);
+		layer.setHgap(20);
+		layer.setAlignment(Pos.CENTER);
 		
 		StackPane mainLayout = new StackPane();
-		Rectangle mainRec = new Rectangle();
-		Label mainLab = new Label();
+		Rectangle mainRec = new Rectangle(200, 200);
+		Label mainLab = new Label("Cat");
 		
 		Button increase = new Button("+");
 		Button decrease = new Button("-");
 		
+		setButtonSizes(increase);
+		setButtonSizes(decrease);
 		
+		mainLayout.getChildren().addAll(mainRec, mainLab);
 		
-		Scene catScene = new Scene(layer);
+		layer.add(increase, 0, 0);
+		layer.add(decrease, 2, 0);
+		layer.add(mainLayout, 1, 0);
+		
+		StackPane realPane = new StackPane();
+		realPane.setAlignment(Pos.CENTER);
+		realPane.getChildren().addAll(layer, returnMenu());
+		
+		Scene catScene = new Scene(realPane);
 		
 		return catScene;
 	}
@@ -179,17 +211,31 @@ public class UIManager {
 	public Scene hugMenu() {
 		
 		GridPane layer = new GridPane();
+		layer.setVgap(20);
+		layer.setHgap(20);
+		layer.setAlignment(Pos.CENTER);
 		
 		StackPane mainLayout = new StackPane();
-		Rectangle mainRec = new Rectangle();
-		Label mainLab = new Label();
+		Rectangle mainRec = new Rectangle(200, 200);
+		Label mainLab = new Label("Hug");
 		
 		Button increase = new Button("+");
 		Button decrease = new Button("-");
 		
+		setButtonSizes(increase);
+		setButtonSizes(decrease);
 		
+		mainLayout.getChildren().addAll(mainRec, mainLab);
 		
-		Scene hugScene = new Scene(layer);
+		layer.add(increase, 0, 0);
+		layer.add(decrease, 2, 0);
+		layer.add(mainLayout, 1, 0);
+		
+		StackPane realPane = new StackPane();
+		realPane.setAlignment(Pos.CENTER);
+		realPane.getChildren().addAll(layer, returnMenu());
+		
+		Scene hugScene = new Scene(realPane);
 		
 		return hugScene;
 	}
@@ -209,11 +255,11 @@ public class UIManager {
 		
 		Button returnMainMenuButton = new Button();
 		Label returnMainMenuLabel = new Label("Ana Menü");
+		returnMainMenuLabel.setMouseTransparent(true);
 		StackPane returnMainMenuPane = new StackPane();
 		returnMainMenuPane.setAlignment(Pos.BOTTOM_RIGHT);
+		returnMainMenuPane.setPadding(new Insets(20));
 		returnMainMenuPane.getChildren().addAll(returnMainMenuButton, returnMainMenuLabel);
-		
-		
 		
 		returnMainMenuButton.prefWidthProperty().bind(stage.widthProperty().divide(6));
 		returnMainMenuButton.prefHeightProperty().bind(stage.heightProperty().divide(10));
