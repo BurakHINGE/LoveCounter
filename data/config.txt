@@ -1,0 +1,5 @@
+coffee_count: 0
+trip_count: 0
+beat_count: 0
+stroke_cat_count: 0
+hug_count: 0
