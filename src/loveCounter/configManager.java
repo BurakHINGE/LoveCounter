@@ -1,0 +1,85 @@
+package loveCounter;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class configManager {
+
+	public static int coffeeCount;
+	public static int tripCount;
+	public static int beatCount;
+	public static int strokeCatCount;
+	public static int hugCount;
+	
+	public void loadConfig() {
+		try {
+			
+			File config = new File("config.txt");
+			Scanner output = new Scanner(config);
+			
+			while (output.hasNext()) {
+				String configName = output.next();
+				
+				if (configName.equals("coffee_count:")) {
+					coffeeCount = output.nextInt();
+				}
+				else if (configName.equals("trip_count:")) {
+					tripCount = output.nextInt();
+				}
+				else if (configName.equals("beat_count:")) {
+					beatCount = output.nextInt();
+				}
+				else if (configName.equals("stroke_cat_count:")) {
+					strokeCatCount = output.nextInt();
+				}
+				else if (configName.equals("hug_count:")) {
+					hugCount = output.nextInt();
+				}
+			}
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("Warning: config.txt file cannot find! Please check the file path.");
+		}
+	}
+
+	public static int getCoffeeCount() {
+		return coffeeCount;
+	}
+
+	public static int getTripCount() {
+		return tripCount;
+	}
+
+	public static int getBeatCount() {
+		return beatCount;
+	}
+
+	public static int getStrokeCatCount() {
+		return strokeCatCount;
+	}
+
+	public static int getHugCount() {
+		return hugCount;
+	}
+
+	public static void setCoffeeCount(int coffeeCount) {
+		configManager.coffeeCount = coffeeCount;
+	}
+
+	public static void setTripCount(int tripCount) {
+		configManager.tripCount = tripCount;
+	}
+
+	public static void setBeatCount(int beatCount) {
+		configManager.beatCount = beatCount;
+	}
+
+	public static void setStrokeCatCount(int strokeCatCount) {
+		configManager.strokeCatCount = strokeCatCount;
+	}
+
+	public static void setHugCount(int hugCount) {
+		configManager.hugCount = hugCount;
+	}
+}
