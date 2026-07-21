@@ -348,11 +348,11 @@ public class UIManager {
 		Label returnMainMenuLabel = new Label("Ana Menü");
 		returnMainMenuLabel.setMouseTransparent(true);
 		StackPane returnMainMenuPane = new StackPane();
-		returnMainMenuPane.setAlignment(Pos.CENTER); // İçeriği ortala
+		returnMainMenuPane.setAlignment(Pos.CENTER);
 		returnMainMenuPane.setMaxWidth(StackPane.USE_PREF_SIZE);
 		returnMainMenuPane.setMaxHeight(StackPane.USE_PREF_SIZE);
 
-		StackPane.setAlignment(returnMainMenuPane, Pos.BOTTOM_RIGHT); // Paneli sağ alta sabitle
+		StackPane.setAlignment(returnMainMenuPane, Pos.BOTTOM_RIGHT); 
 		StackPane.setMargin(returnMainMenuPane, new Insets(20));
 
 		returnMainMenuPane.getChildren().addAll(returnMainMenuButton, returnMainMenuLabel);
