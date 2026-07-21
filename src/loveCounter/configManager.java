@@ -15,7 +15,7 @@ public class configManager {
 	public void loadConfig() {
 		try {
 			
-			File config = new File("config.txt");
+			File config = new File("data/config.txt");
 			Scanner output = new Scanner(config);
 			
 			while (output.hasNext()) {
@@ -37,6 +37,7 @@ public class configManager {
 					hugCount = output.nextInt();
 				}
 			}
+			System.out.println("config.txt başarıyla okundu.");
 		}
 		catch (FileNotFoundException e) {
 			System.out.println("Warning: config.txt file cannot find! Please check the file path.");
