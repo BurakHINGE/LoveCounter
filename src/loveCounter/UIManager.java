@@ -166,7 +166,7 @@ public class UIManager {
 		
 		StackPane mainLayout = new StackPane();
 		Rectangle mainRec = new Rectangle(200, 200);
-		Label mainLab = new Label("Coffee");
+		Label mainLab = new Label(""+configManager.getCoffeeCount());
 		
 		Button increase = new Button("+");
 		Button decrease = new Button("-");
@@ -187,6 +187,8 @@ public class UIManager {
 		coffeeLayer.prefHeightProperty().bind(stage.heightProperty());
 		coffeeLayer.setStyle("-fx-background-color: white;");
 		coffeeLayer.getChildren().addAll(returnMenu(), layer);
+		
+		counterManager.coffeeCountManager(increase, decrease, mainLab);
 		
 		return coffeeLayer;
 	}
@@ -223,6 +225,8 @@ public class UIManager {
 		tripLayer.setStyle("-fx-background-color: white;");
 		tripLayer.getChildren().addAll(returnMenu(), layer);
 		
+		counterManager.tripCountManager(increase, decrease, mainLab);
+		
 		return tripLayer;
 	}
 	
@@ -257,6 +261,8 @@ public class UIManager {
 		strokeCatLayer.prefHeightProperty().bind(stage.heightProperty());
 		strokeCatLayer.setStyle("-fx-background-color: white;");
 		strokeCatLayer.getChildren().addAll(returnMenu(), layer);
+		
+		counterManager.strokeCatCountManager(increase, decrease, mainLab);
 		
 		return strokeCatLayer;
 	}
@@ -293,6 +299,8 @@ public class UIManager {
 		beatLayer.setStyle("-fx-background-color: white;");
 		beatLayer.getChildren().addAll(returnMenu(), layer);
 		
+		counterManager.beatCountManager(increase, decrease, mainLab);
+		
 		return beatLayer;
 	}
 	
@@ -327,6 +335,8 @@ public class UIManager {
 		hugLayer.prefHeightProperty().bind(stage.heightProperty());
 		hugLayer.setStyle("-fx-background-color: white;");
 		hugLayer.getChildren().addAll(returnMenu(), layer);
+		
+		counterManager.hugCountManager(increase, decrease, mainLab);
 		
 		return hugLayer;
 	}
