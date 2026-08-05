@@ -2,6 +2,9 @@ package loveCounter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class configManager {
@@ -43,6 +46,27 @@ public class configManager {
 			System.out.println("Warning: config.txt file cannot find! Please check the file path.");
 		}
 	}
+	
+	public static void saveConfig() {
+        try {
+        	
+            FileWriter fileWriter = new FileWriter("data/config.txt");
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            
+            printWriter.println("coffee_count: " + coffeeCount);
+            printWriter.println("trip_count: " + tripCount);
+            printWriter.println("beat_count: " + beatCount);
+            printWriter.println("stroke_cat_count: " + strokeCatCount);
+            printWriter.println("hug_count: " + hugCount);
+            
+            printWriter.close();
+            System.out.println("Veriler config.txt dosyasına başarıyla kaydedildi.");
+            
+        } catch (IOException e) {
+            System.out.println("Warning: config.txt file cannot write! Please check permissions.");
+            e.printStackTrace();
+        }
+    }
 
 	public static int getCoffeeCount() {
 		return coffeeCount;
