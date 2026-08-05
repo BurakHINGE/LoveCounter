@@ -56,7 +56,7 @@ public class counterManager {
         });
 		decrease.setOnMouseClicked(e -> {
 
-            configManager.setCoffeeCount(configManager.getBeatCount() - 1);
+			configManager.setBeatCount(configManager.getBeatCount() - 1);
             count.setText(String.valueOf(configManager.getBeatCount()));
         });
 	}
