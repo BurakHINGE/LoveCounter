@@ -177,6 +177,7 @@ public class UIManager {
 		catButton.setOnAction(e -> showLayer(strokeCatMenu()));
 		beatButton.setOnAction(e -> showLayer(beatMenu()));
 		hugButton.setOnAction(e -> showLayer(hugMenu()));
+		waterButton.setOnAction(e -> showLayer(waterMenu()));
 //		toDoButton.setOnAction(e -> switchScene(hugMenu()));
 		exitButton.setOnAction(e -> {
 		    configManager.saveConfig();
@@ -254,7 +255,7 @@ public class UIManager {
 		
 		StackPane mainLayout = new StackPane();
 		Rectangle mainRec = new Rectangle(200, 200);
-		Label mainLab = new Label(""+configManager.getCoffeeCount());
+		Label mainLab = new Label(""+configManager.getTripCount());
 		
 		Button increase = new Button();
 		Button decrease = new Button();
@@ -306,7 +307,7 @@ public class UIManager {
 		
 		StackPane mainLayout = new StackPane();
 		Rectangle mainRec = new Rectangle(200, 200);
-		Label mainLab = new Label(""+configManager.getCoffeeCount());
+		Label mainLab = new Label(""+configManager.getStrokeCatCount());
 		
 		Button increase = new Button();
 		Button decrease = new Button();
@@ -358,7 +359,7 @@ public class UIManager {
 		
 		StackPane mainLayout = new StackPane();
 		Rectangle mainRec = new Rectangle(200, 200);
-		Label mainLab = new Label(""+configManager.getCoffeeCount());
+		Label mainLab = new Label(""+configManager.getBeatCount());
 		
 		Button increase = new Button();
 		Button decrease = new Button();
@@ -410,7 +411,7 @@ public class UIManager {
 		
 		StackPane mainLayout = new StackPane();
 		Rectangle mainRec = new Rectangle(200, 200);
-		Label mainLab = new Label(""+configManager.getCoffeeCount());
+		Label mainLab = new Label(""+configManager.getHugCount());
 		
 		Button increase = new Button();
 		Button decrease = new Button();
@@ -450,6 +451,58 @@ public class UIManager {
 		counterManager.hugCountManager(increase, decrease, mainLab);
 		
 		return hugLayer;
+	}
+	
+	public StackPane waterMenu() {
+		
+		GridPane layer = new GridPane();
+		layer.setVgap(20);
+		layer.setHgap(20);
+		layer.setAlignment(Pos.CENTER);
+		layer.setPickOnBounds(false);
+		
+		StackPane mainLayout = new StackPane();
+		Rectangle mainRec = new Rectangle(200, 200);
+		Label mainLab = new Label(""+configManager.getWaterCount());
+		
+		Button increase = new Button();
+		Button decrease = new Button();
+		
+		Label incLabel = new Label("+");
+		Label decLabel = new Label("-");
+		
+		incLabel.setMouseTransparent(true);
+		decLabel.setMouseTransparent(true);
+		
+		StackPane incPane = new StackPane();
+		StackPane decPane = new StackPane();
+		
+		incPane.getChildren().addAll(increase, incLabel);
+		decPane.getChildren().addAll(decrease, decLabel);
+		
+		setButtonSizes(increase);
+		setButtonSizes(decrease);
+		
+		applyCountButtonStyle(increase, incLabel);
+		applyCountButtonStyle(decrease, decLabel);
+		
+		mainLayout.getChildren().addAll(mainRec, mainLab);
+		
+		layer.add(incPane, 0, 0);
+		layer.add(decPane, 2, 0);
+		layer.add(mainLayout, 1, 0);
+		
+		StackPane waterLayer = new StackPane();
+		waterLayer.setAlignment(Pos.CENTER);
+
+		waterLayer.prefWidthProperty().bind(stage.widthProperty());
+		waterLayer.prefHeightProperty().bind(stage.heightProperty());
+		waterLayer.setStyle("-fx-background-color: #FFD1DC;");
+		waterLayer.getChildren().addAll(returnMenu(), layer);
+		
+		counterManager.waterCountManager(increase, decrease, mainLab);
+		
+		return waterLayer;
 	}
 	
 	private void switchScene(Scene scene) {
