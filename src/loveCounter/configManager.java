@@ -14,6 +14,7 @@ public class configManager {
 	public static int beatCount;
 	public static int strokeCatCount;
 	public static int hugCount;
+	public static int waterCount;
 	
 	public void loadConfig() {
 		try {
@@ -39,6 +40,9 @@ public class configManager {
 				else if (configName.equals("hug_count:")) {
 					hugCount = output.nextInt();
 				}
+				else if (configName.equals("water_count:")) {
+					waterCount = output.nextInt();
+				}
 			}
 			System.out.println("config.txt başarıyla okundu.");
 		}
@@ -58,6 +62,7 @@ public class configManager {
             printWriter.println("beat_count: " + beatCount);
             printWriter.println("stroke_cat_count: " + strokeCatCount);
             printWriter.println("hug_count: " + hugCount);
+            printWriter.println("water_count: " + waterCount);
             
             printWriter.close();
             System.out.println("Veriler config.txt dosyasına başarıyla kaydedildi.");
@@ -87,6 +92,10 @@ public class configManager {
 	public static int getHugCount() {
 		return hugCount;
 	}
+	
+	public static int getWaterCount() {
+		return waterCount;
+	}
 
 	public static void setCoffeeCount(int coffeeCount) {
 		configManager.coffeeCount = coffeeCount;
@@ -106,5 +115,9 @@ public class configManager {
 
 	public static void setHugCount(int hugCount) {
 		configManager.hugCount = hugCount;
+	}
+	
+	public static void setWaterCount(int waterCount) {
+		configManager.waterCount = waterCount;
 	}
 }
