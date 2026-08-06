@@ -11,18 +11,34 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class UIManager {
 
 	private Stage stage;
 	private StackPane rootLayer;
+	private String customFontFamily = "System";
 	
 	public UIManager(Stage stage) {
-		this.stage = stage;
-		this.rootLayer = new StackPane();
-		this.rootLayer.setStyle("-fx-background-color: #FFD1DC;");
-	}
+        this.stage = stage;
+        this.rootLayer = new StackPane();
+        this.rootLayer.setStyle("-fx-background-color: #FFD1DC;");
+        
+        String fontPath = "file:resources/fonts/Minecraftia-Regular.ttf";
+
+        try {
+            Font loadedFont = Font.loadFont(fontPath, 14);
+            if (loadedFont != null) {
+                customFontFamily = loadedFont.getFamily();
+                System.out.println("Font has been uploaded successfuly: " + customFontFamily);
+            } else {
+                System.out.println("Font cannot be found: " + fontPath);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 	
 	public Scene startApp() {
 
@@ -127,32 +143,34 @@ public class UIManager {
         toDoButton.prefHeightProperty().bind(stage.heightProperty().divide(10));
         exitButton.prefHeightProperty().bind(stage.heightProperty().divide(10));
         
-        coffeeLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", coffeeButton.heightProperty().divide(3).asString(), "px"));
-        tripLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", tripButton.heightProperty().divide(3).asString(), "px"));
-        catLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", catButton.heightProperty().divide(3).asString(), "px"));
-        beatLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", coffeeButton.heightProperty().divide(3).asString(), "px"));
-        hugLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", hugButton.heightProperty().divide(3).asString(), "px"));
-        waterLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", waterButton.heightProperty().divide(3).asString(), "px"));
-        toDoLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", toDoButton.heightProperty().divide(3).asString(), "px"));
-        exitLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", toDoButton.heightProperty().divide(3).asString(), "px"));
+        coffeeLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", coffeeButton.heightProperty().divide(3).asString(), "px"));
+        tripLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", tripButton.heightProperty().divide(3).asString(), "px"));
+        catLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"; -fx-font-size: ", catButton.heightProperty().divide(3).asString(), "px"));
+        beatLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", coffeeButton.heightProperty().divide(3).asString(), "px"));
+        hugLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", hugButton.heightProperty().divide(3).asString(), "px"));
+        waterLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", waterButton.heightProperty().divide(3).asString(), "px"));
+        toDoLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", toDoButton.heightProperty().divide(3).asString(), "px"));
+        exitLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", toDoButton.heightProperty().divide(3).asString(), "px"));
         
-        coffeeLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", coffeeButton.widthProperty().divide(8).asString(), "px"));
-        tripLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", tripButton.widthProperty().divide(8).asString(), "px"));
-        catLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", catButton.widthProperty().divide(8).asString(), "px"));
-        beatLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", catButton.widthProperty().divide(8).asString(), "px"));
-        hugLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", hugButton.widthProperty().divide(8).asString(), "px"));
-        waterLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", waterButton.widthProperty().divide(8).asString(), "px"));
-        toDoLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", toDoButton.widthProperty().divide(8).asString(), "px"));
-        exitLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", toDoButton.widthProperty().divide(8).asString(), "px"));
+        coffeeLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", coffeeButton.widthProperty().divide(10).asString(), "px"));
+        tripLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", tripButton.widthProperty().divide(10).asString(), "px"));
+        catLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", catButton.widthProperty().divide(10).asString(), "px"));
+        beatLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", catButton.widthProperty().divide(10).asString(), "px"));
+        hugLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", hugButton.widthProperty().divide(10).asString(), "px"));
+        waterLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", waterButton.widthProperty().divide(10).asString(), "px"));
+        toDoLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", toDoButton.widthProperty().divide(10).asString(), "px"));
+        exitLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", toDoButton.widthProperty().divide(10).asString(), "px"));
 		
-        applyCountButtonStyle(coffeeButton);
-        applyCountButtonStyle(tripButton);
-        applyCountButtonStyle(catButton);
-        applyCountButtonStyle(beatButton);
-        applyCountButtonStyle(hugButton);
-        applyCountButtonStyle(waterButton);
-        applyCountButtonStyle(toDoButton);
-        applyButton74Style(exitButton);
+        applyCountButtonStyle(coffeeButton, coffeeLabel);
+        applyCountButtonStyle(tripButton, tripLabel);
+        applyCountButtonStyle(catButton, catLabel);
+        applyCountButtonStyle(beatButton, beatLabel);
+        applyCountButtonStyle(hugButton, hugLabel);
+        applyCountButtonStyle(waterButton, waterLabel);
+        applyCountButtonStyle(toDoButton, toDoLabel);
+        applyButton74Style(exitButton, exitLabel);
+
+
         
 		coffeeButton.setOnAction(e -> showLayer(coffeeMenu()));
 		tripButton.setOnAction(e -> showLayer(tripMenu()));
@@ -186,19 +204,31 @@ public class UIManager {
 		Rectangle mainRec = new Rectangle(200, 200);
 		Label mainLab = new Label(""+configManager.getCoffeeCount());
 		
-		Button increase = new Button("+");
-		Button decrease = new Button("-");
+		Button increase = new Button();
+		Button decrease = new Button();
+		
+		Label incLabel = new Label("+");
+		Label decLabel = new Label("-");
+		
+		incLabel.setMouseTransparent(true);
+		decLabel.setMouseTransparent(true);
+		
+		StackPane incPane = new StackPane();
+		StackPane decPane = new StackPane();
+		
+		incPane.getChildren().addAll(increase, incLabel);
+		decPane.getChildren().addAll(decrease, decLabel);
 		
 		setButtonSizes(increase);
 		setButtonSizes(decrease);
 		
-		applyCountButtonStyle(increase);
-		applyCountButtonStyle(decrease);
+		applyCountButtonStyle(increase, incLabel);
+		applyCountButtonStyle(decrease, decLabel);
 		
 		mainLayout.getChildren().addAll(mainRec, mainLab);
 		
-		layer.add(increase, 0, 0);
-		layer.add(decrease, 2, 0);
+		layer.add(incPane, 0, 0);
+		layer.add(decPane, 2, 0);
 		layer.add(mainLayout, 1, 0);
 		
 		StackPane coffeeLayer = new StackPane();
@@ -226,19 +256,31 @@ public class UIManager {
 		Rectangle mainRec = new Rectangle(200, 200);
 		Label mainLab = new Label(""+configManager.getCoffeeCount());
 		
-		Button increase = new Button("+");
-		Button decrease = new Button("-");
+		Button increase = new Button();
+		Button decrease = new Button();
+		
+		Label incLabel = new Label("+");
+		Label decLabel = new Label("-");
+		
+		incLabel.setMouseTransparent(true);
+		decLabel.setMouseTransparent(true);
+		
+		StackPane incPane = new StackPane();
+		StackPane decPane = new StackPane();
+		
+		incPane.getChildren().addAll(increase, incLabel);
+		decPane.getChildren().addAll(decrease, decLabel);
 		
 		setButtonSizes(increase);
 		setButtonSizes(decrease);
 		
-		applyCountButtonStyle(increase);
-		applyCountButtonStyle(decrease);
+		applyCountButtonStyle(increase, incLabel);
+		applyCountButtonStyle(decrease, decLabel);
 		
 		mainLayout.getChildren().addAll(mainRec, mainLab);
 		
-		layer.add(increase, 0, 0);
-		layer.add(decrease, 2, 0);
+		layer.add(incPane, 0, 0);
+		layer.add(decPane, 2, 0);
 		layer.add(mainLayout, 1, 0);
 		
 		StackPane tripLayer = new StackPane();
@@ -266,19 +308,31 @@ public class UIManager {
 		Rectangle mainRec = new Rectangle(200, 200);
 		Label mainLab = new Label(""+configManager.getCoffeeCount());
 		
-		Button increase = new Button("+");
-		Button decrease = new Button("-");
+		Button increase = new Button();
+		Button decrease = new Button();
+		
+		Label incLabel = new Label("+");
+		Label decLabel = new Label("-");
+		
+		incLabel.setMouseTransparent(true);
+		decLabel.setMouseTransparent(true);
+		
+		StackPane incPane = new StackPane();
+		StackPane decPane = new StackPane();
+		
+		incPane.getChildren().addAll(increase, incLabel);
+		decPane.getChildren().addAll(decrease, decLabel);
 		
 		setButtonSizes(increase);
 		setButtonSizes(decrease);
 		
-		applyCountButtonStyle(increase);
-		applyCountButtonStyle(decrease);
+		applyCountButtonStyle(increase, incLabel);
+		applyCountButtonStyle(decrease, decLabel);
 		
 		mainLayout.getChildren().addAll(mainRec, mainLab);
 		
-		layer.add(increase, 0, 0);
-		layer.add(decrease, 2, 0);
+		layer.add(incPane, 0, 0);
+		layer.add(decPane, 2, 0);
 		layer.add(mainLayout, 1, 0);
 		
 		StackPane strokeCatLayer = new StackPane();
@@ -306,19 +360,31 @@ public class UIManager {
 		Rectangle mainRec = new Rectangle(200, 200);
 		Label mainLab = new Label(""+configManager.getCoffeeCount());
 		
-		Button increase = new Button("+");
-		Button decrease = new Button("-");
+		Button increase = new Button();
+		Button decrease = new Button();
+		
+		Label incLabel = new Label("+");
+		Label decLabel = new Label("-");
+		
+		incLabel.setMouseTransparent(true);
+		decLabel.setMouseTransparent(true);
+		
+		StackPane incPane = new StackPane();
+		StackPane decPane = new StackPane();
+		
+		incPane.getChildren().addAll(increase, incLabel);
+		decPane.getChildren().addAll(decrease, decLabel);
 		
 		setButtonSizes(increase);
 		setButtonSizes(decrease);
 		
-		applyCountButtonStyle(increase);
-		applyCountButtonStyle(decrease);
+		applyCountButtonStyle(increase, incLabel);
+		applyCountButtonStyle(decrease, decLabel);
 		
 		mainLayout.getChildren().addAll(mainRec, mainLab);
 		
-		layer.add(increase, 0, 0);
-		layer.add(decrease, 2, 0);
+		layer.add(incPane, 0, 0);
+		layer.add(decPane, 2, 0);
 		layer.add(mainLayout, 1, 0);
 		
 		StackPane beatLayer = new StackPane();
@@ -346,19 +412,31 @@ public class UIManager {
 		Rectangle mainRec = new Rectangle(200, 200);
 		Label mainLab = new Label(""+configManager.getCoffeeCount());
 		
-		Button increase = new Button("+");
-		Button decrease = new Button("-");
+		Button increase = new Button();
+		Button decrease = new Button();
+		
+		Label incLabel = new Label("+");
+		Label decLabel = new Label("-");
+		
+		incLabel.setMouseTransparent(true);
+		decLabel.setMouseTransparent(true);
+		
+		StackPane incPane = new StackPane();
+		StackPane decPane = new StackPane();
+		
+		incPane.getChildren().addAll(increase, incLabel);
+		decPane.getChildren().addAll(decrease, decLabel);
 		
 		setButtonSizes(increase);
 		setButtonSizes(decrease);
 		
-		applyCountButtonStyle(increase);
-		applyCountButtonStyle(decrease);
+		applyCountButtonStyle(increase, incLabel);
+		applyCountButtonStyle(decrease, decLabel);
 		
 		mainLayout.getChildren().addAll(mainRec, mainLab);
 		
-		layer.add(increase, 0, 0);
-		layer.add(decrease, 2, 0);
+		layer.add(incPane, 0, 0);
+		layer.add(decPane, 2, 0);
 		layer.add(mainLayout, 1, 0);
 		
 		StackPane hugLayer = new StackPane();
@@ -402,9 +480,9 @@ public class UIManager {
 		
 		returnMainMenuButton.prefWidthProperty().bind(stage.widthProperty().divide(6));
 		returnMainMenuButton.prefHeightProperty().bind(stage.heightProperty().divide(10));
-		returnMainMenuLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", returnMainMenuButton.heightProperty().divide(3).asString(), "px"));
-		returnMainMenuLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", returnMainMenuButton.widthProperty().divide(8).asString(), "px"));
-		applyButton74Style(returnMainMenuButton);
+		returnMainMenuLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", returnMainMenuButton.heightProperty().divide(3).asString(), "px"));
+		returnMainMenuLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", returnMainMenuButton.widthProperty().divide(8).asString(), "px"));
+		applyButton74Style(returnMainMenuButton, returnMainMenuLabel);
 		
 		configManager.saveConfig();
 		returnMainMenuButton.setOnAction(e -> {
@@ -469,63 +547,68 @@ public class UIManager {
 	    });
 	}
 
-	private void applyButton74Style(Button button) {
-	    // Normal durum stili (Yuvarlak köşeler ve renkler)
+	private void applyButton74Style(Button button, Label label) {
 	    String defaultStyle = "-fx-background-color: #fbeee0; " +
 	                          "-fx-border-color: #422800; " +
 	                          "-fx-border-width: 2px; " +
 	                          "-fx-border-radius: 30px; " +
 	                          "-fx-background-radius: 30px; " +
 	                          "-fx-text-fill: #422800; " +
+	                          "-fx-font-family: '" + customFontFamily + "'; " + 
 	                          "-fx-font-weight: bold; " +
 	                          "-fx-font-size: 18px; " +
 	                          "-fx-cursor: hand;";
 	                          
-	    // Üzerine gelince (Hover) arka planın beyaz olması
 	    String hoverStyle =   "-fx-background-color: #ffffff; " +
 	                          "-fx-border-color: #422800; " +
 	                          "-fx-border-width: 2px; " +
 	                          "-fx-border-radius: 30px; " +
 	                          "-fx-background-radius: 30px; " +
 	                          "-fx-text-fill: #422800; " +
+	                          "-fx-font-family: '" + customFontFamily + "'; " + 
 	                          "-fx-font-weight: bold; " +
 	                          "-fx-font-size: 18px; " +
 	                          "-fx-cursor: hand;";
 
 	    button.setStyle(defaultStyle);
 	    
-	    // Sert gölge efekti (4 piksel sağa ve aşağıya)
 	    DropShadow shadow = new DropShadow();
-	    shadow.setRadius(0); // Bulanıklık 0
+	    shadow.setRadius(0);
 	    shadow.setOffsetX(4); 
 	    shadow.setOffsetY(4); 
 	    shadow.setColor(Color.web("#422800")); 
 	    
 	    button.setEffect(shadow);
 
-	    // Fare ile üzerine gelme olayları
+	    // Çıkış butonu için de aynı font düzeltmesi
+	    int fontOffset = 4;
+	    label.setTranslateY(fontOffset);
+
 	    button.setOnMouseEntered(e -> button.setStyle(hoverStyle));
+	    
 	    button.setOnMouseExited(e -> button.setStyle(defaultStyle));
 
-	    // Butona basılma anı (Aşağı-sağa kayma ve gölgenin küçülmesi)
 	    button.setOnMousePressed(e -> {
 	        button.setTranslateX(2);
 	        button.setTranslateY(2);
+	        label.setTranslateX(2); // Sağa kayma
+	        label.setTranslateY(2 + fontOffset); // Aşağı kayma
 	        shadow.setOffsetX(2);
 	        shadow.setOffsetY(2);
 	    });
 
-	    // Buton bırakıldığında eski haline dönmesi
 	    button.setOnMouseReleased(e -> {
 	        button.setTranslateX(0);
 	        button.setTranslateY(0);
+	        label.setTranslateX(0);
+	        label.setTranslateY(fontOffset);
 	        shadow.setOffsetX(4);
 	        shadow.setOffsetY(4);
 	    });
 	}
 
-	private void applyCountButtonStyle(Button button) {
-	    // Normal durum stili (Açık pembe arka plan, koyu çerçeve ve yuvarlak hatlar)
+
+	private void applyCountButtonStyle(Button button, Label label) {
 	    String defaultStyle = "-fx-background-color: #fff0f0; " +
 	                          "-fx-border-color: #b18597; " +
 	                          "-fx-border-width: 2px; " +
@@ -534,10 +617,9 @@ public class UIManager {
 	                          "-fx-text-fill: #382b22; " +
 	                          "-fx-font-weight: bold; " +
 	                          "-fx-font-size: 15px; " +
-	                          "-fx-padding: 12 25 12 25; " + // İç boşluklar (Yükseklik ve Genişlik)
+	                          "-fx-padding: 12 25 12 25; " +
 	                          "-fx-cursor: hand;";
 	                          
-	    // Üzerine gelince (Hover) arka planın biraz daha koyu pembe olması
 	    String hoverStyle =   "-fx-background-color: #ffe9e9; " +
 	                          "-fx-border-color: #b18597; " +
 	                          "-fx-border-width: 2px; " +
@@ -551,54 +633,54 @@ public class UIManager {
 
 	    button.setStyle(defaultStyle);
 
-	    // 1. GÖLGE: 3D Derinliği veren ana gövde (Pembe)
 	    DropShadow depthShadow = new DropShadow();
-	    depthShadow.setRadius(0); // Bulanıklık 0 (Sert kenar)
+	    depthShadow.setRadius(0);
 	    depthShadow.setOffsetX(0);
-	    depthShadow.setOffsetY(10); // Aşağı doğru 10 piksel derinlik
+	    depthShadow.setOffsetY(10);
 	    depthShadow.setColor(Color.web("#f9c4d2"));
 
-	    // 2. GÖLGE: 3D Derinliğin en altındaki ince koyu sınır (Koyu Pembe)
 	    DropShadow borderShadow = new DropShadow();
 	    borderShadow.setRadius(0);
 	    borderShadow.setOffsetX(0);
-	    borderShadow.setOffsetY(12); // Derinlikten 2 piksel daha uzun
+	    borderShadow.setOffsetY(12);
 	    borderShadow.setColor(Color.web("#b18597"));
 	    
-	    // Gölgeleri birbirine bağla (Katmanlı 3D efekti yaratır)
 	    depthShadow.setInput(borderShadow);
 	    button.setEffect(depthShadow);
 
-	    // Fare ile üzerine gelme (Hover) - Buton hafifçe aşağı iner
+	    // Fontun yukarıda durmasını engellemek için ince ayar (Örn: 4 piksel aşağı itiyoruz)
+	    int fontOffset = 4; 
+	    label.setTranslateY(fontOffset);
+
 	    button.setOnMouseEntered(e -> {
 	        button.setStyle(hoverStyle);
-	        button.setTranslateY(2);       // Butonu 2 piksel aşağı it
-	        depthShadow.setOffsetY(8);     // Gölgeyi 2 piksel kısalt
+	        button.setTranslateY(2);
+	        label.setTranslateY(2 + fontOffset); // Yazı da butonla hareket etsin
+	        depthShadow.setOffsetY(8);
 	        borderShadow.setOffsetY(10);
 	    });
 
-	    // Fare üzerinden çekildiğinde - Eski haline döner
 	    button.setOnMouseExited(e -> {
 	        button.setStyle(defaultStyle);
 	        button.setTranslateY(0);
+	        label.setTranslateY(fontOffset); // Eski konumuna dönsün
 	        depthShadow.setOffsetY(10);
 	        borderShadow.setOffsetY(12);
 	    });
 
-	    // Butona basılma (Active) anı - Buton tamamen zemine çöker
 	    button.setOnMousePressed(e -> {
 	        button.setStyle(hoverStyle);
-	        button.setTranslateY(12);      // Buton gölgenin bittiği yere kadar çöker
-	        depthShadow.setOffsetY(0);     // Gölgeler sıfırlanır
+	        button.setTranslateY(12);
+	        label.setTranslateY(12 + fontOffset); // Yazı butonla beraber tamamen çöksün
+	        depthShadow.setOffsetY(0);
 	        borderShadow.setOffsetY(0);
 	    });
 
-	    // Buton bırakıldığında - Fare hala üstünde olduğu için Hover durumuna döner
 	    button.setOnMouseReleased(e -> {
 	        button.setTranslateY(2);
+	        label.setTranslateY(2 + fontOffset);
 	        depthShadow.setOffsetY(8);
 	        borderShadow.setOffsetY(10);
 	    });
 	}
-
 }
