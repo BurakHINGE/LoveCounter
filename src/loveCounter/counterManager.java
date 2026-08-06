@@ -74,4 +74,18 @@ public class counterManager {
             count.setText(String.valueOf(configManager.getHugCount()));
         });
 	}
+	
+	public static void waterCountManager(Button increase, Button decrease, Label count) {
+		
+		increase.setOnMouseClicked(e -> {
+
+            configManager.setWaterCount(configManager.getWaterCount() + 1);
+            count.setText(String.valueOf(configManager.getWaterCount()));
+        });
+		decrease.setOnMouseClicked(e -> {
+
+            configManager.setWaterCount(configManager.getWaterCount() - 1);
+            count.setText(String.valueOf(configManager.getWaterCount()));
+        });
+	}
 }
