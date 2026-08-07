@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -456,8 +457,8 @@ public class UIManager {
 	public StackPane waterMenu() {
 		
 		GridPane layer = new GridPane();
-		layer.setVgap(20);
-		layer.setHgap(20);
+		layer.setVgap(10);
+		layer.setHgap(100);
 		layer.setAlignment(Pos.CENTER);
 		layer.setPickOnBounds(false);
 		
@@ -465,42 +466,106 @@ public class UIManager {
 		Rectangle mainRec = new Rectangle(200, 200);
 		Label mainLab = new Label(""+configManager.getWaterCount());
 		
-		Button increase = new Button();
-		Button decrease = new Button();
+		StackPane plusPane = new StackPane();
+		StackPane miniusPane = new StackPane();
 		
-		Label incLabel = new Label("+");
-		Label decLabel = new Label("-");
+		Rectangle increase = new Rectangle(150, 50);
+		Rectangle decrease = new Rectangle(150, 50);
 		
-		incLabel.setMouseTransparent(true);
-		decLabel.setMouseTransparent(true);
+		Label plus = new Label("+");
+		Label minius = new Label("-");
 		
-		StackPane incPane = new StackPane();
-		StackPane decPane = new StackPane();
+		plusPane.getChildren().addAll(increase, plus);
+		miniusPane.getChildren().addAll(decrease, minius);
 		
-		incPane.getChildren().addAll(increase, incLabel);
-		decPane.getChildren().addAll(decrease, decLabel);
+		Button incml100 = new Button();
+		Button incml200 = new Button();
+		Button incml500 = new Button();
+		Button incl1 = new Button();
 		
-		setButtonSizes(increase);
-		setButtonSizes(decrease);
+		Button decml100 = new Button();
+		Button decml200 = new Button();
+		Button decml500 = new Button();
+		Button decl1 = new Button();
 		
-		applyCountButtonStyle(increase, incLabel);
-		applyCountButtonStyle(decrease, decLabel);
+		Label incLml100 = new Label("100 ml");
+		Label incLml200 = new Label("200 ml");
+		Label incLml500 = new Label("500 ml");
+		Label incLl1 = new Label("1 L");
+		
+		Label decLml100 = new Label("100 ml");
+		Label decLml200 = new Label("200 ml");
+		Label decLml500 = new Label("500 ml");
+		Label decLl1 = new Label("1 L");
+		
+		StackPane plusPane100 = new StackPane();
+		StackPane plusPane200 = new StackPane();
+		StackPane plusPane500 = new StackPane();
+		StackPane plusPane1 = new StackPane();
+		
+		StackPane miniusPane100 = new StackPane();
+		StackPane miniusPane200 = new StackPane();
+		StackPane miniusPane500 = new StackPane();
+		StackPane miniusPane1 = new StackPane();
+		
+		plusPane100.getChildren().addAll(incml100, incLml100);
+		plusPane200.getChildren().addAll(incml200, incLml200);
+		plusPane500.getChildren().addAll(incml500, incLml500);
+		plusPane1.getChildren().addAll(incl1, incLl1);
+		miniusPane100.getChildren().addAll(decml100, decLml100);
+		miniusPane200.getChildren().addAll(decml200, decLml200);
+		miniusPane500.getChildren().addAll(decml500, decLml500);
+		miniusPane1.getChildren().addAll(decl1, decLl1);
+		
+		VBox pBox = new VBox(20);
+		VBox mBox = new VBox(20);
+		
+		pBox.getChildren().addAll(plusPane, plusPane100, plusPane200,plusPane500, plusPane1);
+		mBox.getChildren().addAll(miniusPane, miniusPane100, miniusPane200, miniusPane500, miniusPane1);
+		
+		incLml100.setMouseTransparent(true);
+		incLml200.setMouseTransparent(true);
+		incLml500.setMouseTransparent(true);
+		incLl1.setMouseTransparent(true);
+		decLml100.setMouseTransparent(true);
+		decLml200.setMouseTransparent(true);
+		decLml500.setMouseTransparent(true);
+		decLl1.setMouseTransparent(true);
+		
+		
+		setButtonSizes(incml100);
+		setButtonSizes(incml200);
+		setButtonSizes(incml500);
+		setButtonSizes(incl1);
+		setButtonSizes(decml100);
+		setButtonSizes(decml200);
+		setButtonSizes(decml500);
+		setButtonSizes(decl1);
+		
+		applyCountButtonStyle(incml100, incLml100);
+		applyCountButtonStyle(incml200, incLml200);
+		applyCountButtonStyle(incml500, incLml500);
+		applyCountButtonStyle(incl1, incLl1);
+		applyCountButtonStyle(decml100, decLml100);
+		applyCountButtonStyle(decml200, decLml200);
+		applyCountButtonStyle(decml500, decLml500);
+		applyCountButtonStyle(decl1, decLl1);
 		
 		mainLayout.getChildren().addAll(mainRec, mainLab);
 		
-		layer.add(incPane, 0, 0);
-		layer.add(decPane, 2, 0);
+		layer.add(pBox, 0, 0);
+		layer.add(mBox, 2, 0);
 		layer.add(mainLayout, 1, 0);
+		
 		
 		StackPane waterLayer = new StackPane();
 		waterLayer.setAlignment(Pos.CENTER);
-
 		waterLayer.prefWidthProperty().bind(stage.widthProperty());
 		waterLayer.prefHeightProperty().bind(stage.heightProperty());
 		waterLayer.setStyle("-fx-background-color: #FFD1DC;");
 		waterLayer.getChildren().addAll(returnMenu(), layer);
 		
-		counterManager.waterCountManager(increase, decrease, mainLab);
+		counterManager.waterCountManager(incml100, incml200, incml500, incl1, decml100, decml200, decml500, decl1, mainLab);
 		
 		return waterLayer;
 	}
