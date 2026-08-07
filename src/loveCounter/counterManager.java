@@ -75,16 +75,46 @@ public class counterManager {
         });
 	}
 	
-	public static void waterCountManager(Button increase, Button decrease, Label count) {
+	public static void waterCountManager(Button inc1, Button inc2, Button inc3, Button inc4, Button dec1, Button dec2, Button dec3, Button dec4, Label count) {
 		
-		increase.setOnMouseClicked(e -> {
+		inc1.setOnMouseClicked(e -> {
 
-            configManager.setWaterCount(configManager.getWaterCount() + 1);
+            configManager.setWaterCount(configManager.getWaterCount() + 100);
             count.setText(String.valueOf(configManager.getWaterCount()));
         });
-		decrease.setOnMouseClicked(e -> {
+		dec1.setOnMouseClicked(e -> {
 
-            configManager.setWaterCount(configManager.getWaterCount() - 1);
+            configManager.setWaterCount(configManager.getWaterCount() - 100);
+            count.setText(String.valueOf(configManager.getWaterCount()));
+        });
+		inc2.setOnMouseClicked(e -> {
+
+            configManager.setWaterCount(configManager.getWaterCount() + 200);
+            count.setText(String.valueOf(configManager.getWaterCount()));
+        });
+		dec2.setOnMouseClicked(e -> {
+
+            configManager.setWaterCount(configManager.getWaterCount() - 200);
+            count.setText(String.valueOf(configManager.getWaterCount()));
+        });
+		inc3.setOnMouseClicked(e -> {
+
+            configManager.setWaterCount(configManager.getWaterCount() + 500);
+            count.setText(String.valueOf(configManager.getWaterCount()));
+        });
+		dec3.setOnMouseClicked(e -> {
+
+            configManager.setWaterCount(configManager.getWaterCount() - 500);
+            count.setText(String.valueOf(configManager.getWaterCount()));
+        });
+		inc4.setOnMouseClicked(e -> {
+
+            configManager.setWaterCount(configManager.getWaterCount() + 1000);
+            count.setText(String.valueOf(configManager.getWaterCount()));
+        });
+		dec4.setOnMouseClicked(e -> {
+
+            configManager.setWaterCount(configManager.getWaterCount() - 1000);
             count.setText(String.valueOf(configManager.getWaterCount()));
         });
 	}
