@@ -6,13 +6,26 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class UIManager {
@@ -171,7 +184,7 @@ public class UIManager {
         applyCountButtonStyle(toDoButton, toDoLabel);
         applyButton74Style(exitButton, exitLabel);
 
-
+        StackPane.setMargin(exitLabel, new Insets(15, 0, 0, 0));
         
 		coffeeButton.setOnAction(e -> showLayer(coffeeMenu()));
 		tripButton.setOnAction(e -> showLayer(tripMenu()));
@@ -197,13 +210,13 @@ public class UIManager {
 	public StackPane coffeeMenu() {
 		
 		GridPane layer = new GridPane();
-		layer.setVgap(20);
-		layer.setHgap(20);
+		layer.setVgap(75);
+		layer.setHgap(75);
 		layer.setAlignment(Pos.CENTER);
 		layer.setPickOnBounds(false);
 		
 		StackPane mainLayout = new StackPane();
-		Rectangle mainRec = new Rectangle(200, 200);
+		Rectangle mainRec = new Rectangle(300, 300);
 		Label mainLab = new Label(""+configManager.getCoffeeCount());
 		
 		Button increase = new Button();
@@ -227,11 +240,18 @@ public class UIManager {
 		applyCountButtonStyle(increase, incLabel);
 		applyCountButtonStyle(decrease, decLabel);
 		
+		applyRectangleStyle(mainRec);
+		
 		mainLayout.getChildren().addAll(mainRec, mainLab);
 		
 		layer.add(incPane, 0, 0);
 		layer.add(decPane, 2, 0);
 		layer.add(mainLayout, 1, 0);
+		
+		incLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", increase.heightProperty().divide(4).asString(), "px"));
+		decLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", decrease.heightProperty().divide(4).asString(), "px"));
+		mainLab.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", mainRec.widthProperty().divide(4).asString(), "px"));
+		mainLab.setTranslateY(30);
 		
 		StackPane coffeeLayer = new StackPane();
 		coffeeLayer.setAlignment(Pos.CENTER);
@@ -249,13 +269,13 @@ public class UIManager {
 	public StackPane tripMenu() {
 		
 		GridPane layer = new GridPane();
-		layer.setVgap(20);
-		layer.setHgap(20);
+		layer.setVgap(75);
+		layer.setHgap(75);
 		layer.setAlignment(Pos.CENTER);
 		layer.setPickOnBounds(false);
 		
 		StackPane mainLayout = new StackPane();
-		Rectangle mainRec = new Rectangle(200, 200);
+		Rectangle mainRec = new Rectangle(300, 300);
 		Label mainLab = new Label(""+configManager.getTripCount());
 		
 		Button increase = new Button();
@@ -279,11 +299,18 @@ public class UIManager {
 		applyCountButtonStyle(increase, incLabel);
 		applyCountButtonStyle(decrease, decLabel);
 		
+		applyRectangleStyle(mainRec);
+		
 		mainLayout.getChildren().addAll(mainRec, mainLab);
 		
 		layer.add(incPane, 0, 0);
 		layer.add(decPane, 2, 0);
 		layer.add(mainLayout, 1, 0);
+		
+		incLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", increase.heightProperty().divide(4).asString(), "px"));
+		decLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", decrease.heightProperty().divide(4).asString(), "px"));
+		mainLab.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", mainRec.widthProperty().divide(4).asString(), "px"));
+		mainLab.setTranslateY(30);
 		
 		StackPane tripLayer = new StackPane();
 		tripLayer.setAlignment(Pos.CENTER);
@@ -301,13 +328,13 @@ public class UIManager {
 	public StackPane strokeCatMenu() {
 		
 		GridPane layer = new GridPane();
-		layer.setVgap(20);
-		layer.setHgap(20);
+		layer.setVgap(75);
+		layer.setHgap(75);
 		layer.setAlignment(Pos.CENTER);
 		layer.setPickOnBounds(false);
 		
 		StackPane mainLayout = new StackPane();
-		Rectangle mainRec = new Rectangle(200, 200);
+		Rectangle mainRec = new Rectangle(300, 300);
 		Label mainLab = new Label(""+configManager.getStrokeCatCount());
 		
 		Button increase = new Button();
@@ -331,11 +358,18 @@ public class UIManager {
 		applyCountButtonStyle(increase, incLabel);
 		applyCountButtonStyle(decrease, decLabel);
 		
+		applyRectangleStyle(mainRec);
+		
 		mainLayout.getChildren().addAll(mainRec, mainLab);
 		
 		layer.add(incPane, 0, 0);
 		layer.add(decPane, 2, 0);
 		layer.add(mainLayout, 1, 0);
+		
+		incLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", increase.heightProperty().divide(4).asString(), "px"));
+		decLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", decrease.heightProperty().divide(4).asString(), "px"));
+		mainLab.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", mainRec.widthProperty().divide(4).asString(), "px"));
+		mainLab.setTranslateY(30);
 		
 		StackPane strokeCatLayer = new StackPane();
 		strokeCatLayer.setAlignment(Pos.CENTER);
@@ -353,13 +387,13 @@ public class UIManager {
 	public StackPane beatMenu() {
 		
 		GridPane layer = new GridPane();
-		layer.setVgap(20);
-		layer.setHgap(20);
+		layer.setVgap(75);
+		layer.setHgap(75);
 		layer.setAlignment(Pos.CENTER);
 		layer.setPickOnBounds(false);
 		
 		StackPane mainLayout = new StackPane();
-		Rectangle mainRec = new Rectangle(200, 200);
+		Rectangle mainRec = new Rectangle(300, 300);
 		Label mainLab = new Label(""+configManager.getBeatCount());
 		
 		Button increase = new Button();
@@ -383,11 +417,18 @@ public class UIManager {
 		applyCountButtonStyle(increase, incLabel);
 		applyCountButtonStyle(decrease, decLabel);
 		
+		applyRectangleStyle(mainRec);
+		
 		mainLayout.getChildren().addAll(mainRec, mainLab);
 		
 		layer.add(incPane, 0, 0);
 		layer.add(decPane, 2, 0);
 		layer.add(mainLayout, 1, 0);
+		
+		incLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", increase.heightProperty().divide(4).asString(), "px"));
+		decLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", decrease.heightProperty().divide(4).asString(), "px"));
+		mainLab.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", mainRec.widthProperty().divide(4).asString(), "px"));
+		mainLab.setTranslateY(30);
 		
 		StackPane beatLayer = new StackPane();
 		beatLayer.setAlignment(Pos.CENTER);
@@ -405,13 +446,13 @@ public class UIManager {
 	public StackPane hugMenu() {
 		
 		GridPane layer = new GridPane();
-		layer.setVgap(20);
-		layer.setHgap(20);
+		layer.setVgap(75);
+		layer.setHgap(75);
 		layer.setAlignment(Pos.CENTER);
 		layer.setPickOnBounds(false);
 		
 		StackPane mainLayout = new StackPane();
-		Rectangle mainRec = new Rectangle(200, 200);
+		Rectangle mainRec = new Rectangle(300, 300);
 		Label mainLab = new Label(""+configManager.getHugCount());
 		
 		Button increase = new Button();
@@ -435,11 +476,18 @@ public class UIManager {
 		applyCountButtonStyle(increase, incLabel);
 		applyCountButtonStyle(decrease, decLabel);
 		
+		applyRectangleStyle(mainRec);
+		
 		mainLayout.getChildren().addAll(mainRec, mainLab);
 		
 		layer.add(incPane, 0, 0);
 		layer.add(decPane, 2, 0);
 		layer.add(mainLayout, 1, 0);
+		
+		incLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", increase.heightProperty().divide(4).asString(), "px"));
+		decLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", decrease.heightProperty().divide(4).asString(), "px"));
+		mainLab.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", mainRec.widthProperty().divide(4).asString(), "px"));
+		mainLab.setTranslateY(30);
 		
 		StackPane hugLayer = new StackPane();
 		hugLayer.setAlignment(Pos.CENTER);
@@ -463,7 +511,7 @@ public class UIManager {
 		layer.setPickOnBounds(false);
 		
 		StackPane mainLayout = new StackPane();
-		Rectangle mainRec = new Rectangle(200, 200);
+		Rectangle mainRec = new Rectangle(300, 300);
 		Label mainLab = new Label(""+configManager.getWaterCount());
 		
 		StackPane plusPane = new StackPane();
@@ -471,6 +519,9 @@ public class UIManager {
 		
 		Rectangle increase = new Rectangle(150, 50);
 		Rectangle decrease = new Rectangle(150, 50);
+		
+		applyRectangleStyle(increase);
+		applyRectangleStyle(decrease);
 		
 		Label plus = new Label("+");
 		Label minius = new Label("-");
@@ -551,12 +602,17 @@ public class UIManager {
 		applyCountButtonStyle(decml500, decLml500);
 		applyCountButtonStyle(decl1, decLl1);
 		
+		applyRectangleStyle(mainRec);
+		
 		mainLayout.getChildren().addAll(mainRec, mainLab);
 		
 		layer.add(pBox, 0, 0);
 		layer.add(mBox, 2, 0);
 		layer.add(mainLayout, 1, 0);
-		
+	
+		plus.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", increase.heightProperty().divide(4).asString(), "px"));
+		minius.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", decrease.heightProperty().divide(4).asString(), "px"));
+		mainLab.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", mainRec.widthProperty().divide(4).asString(), "px"));
 		
 		StackPane waterLayer = new StackPane();
 		waterLayer.setAlignment(Pos.CENTER);
@@ -601,6 +657,7 @@ public class UIManager {
 		returnMainMenuLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", returnMainMenuButton.heightProperty().divide(3).asString(), "px"));
 		returnMainMenuLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", returnMainMenuButton.widthProperty().divide(8).asString(), "px"));
 		applyButton74Style(returnMainMenuButton, returnMainMenuLabel);
+		StackPane.setMargin(returnMainMenuLabel, new Insets(20, 0, 0, 0));
 		
 		configManager.saveConfig();
 		returnMainMenuButton.setOnAction(e -> {
@@ -767,7 +824,7 @@ public class UIManager {
 	    button.setEffect(depthShadow);
 
 	    // Fontun yukarıda durmasını engellemek için ince ayar (Örn: 4 piksel aşağı itiyoruz)
-	    int fontOffset = 4; 
+	    int fontOffset = 8; 
 	    label.setTranslateY(fontOffset);
 
 	    button.setOnMouseEntered(e -> {
@@ -801,4 +858,33 @@ public class UIManager {
 	        borderShadow.setOffsetY(10);
 	    });
 	}
+	
+	private void applyRectangleStyle(Rectangle rect) {
+	    // 1. Arka Plan Gradient (Doğrusal Renk Geçişi)
+	    LinearGradient gradient = new LinearGradient(
+	            0, 0, 1, 1, true, CycleMethod.NO_CYCLE,
+	            new Stop(0, Color.web("#ffe6e9")),
+	            new Stop(1, Color.web("#ffb3c1"))
+	    );
+	    rect.setFill(gradient);
+
+	    // 2. Köşe Yuvarlatma 
+	    rect.setArcWidth(50);
+	    rect.setArcHeight(50);
+
+	    // 3. Çerçeve (Border)
+	    rect.setStroke(Color.web("#ff8fa3"));
+	    rect.setStrokeWidth(2);
+
+	    // 4. Gölge Efekti (DropShadow)
+	    DropShadow dropShadow = new DropShadow();
+	    dropShadow.setBlurType(BlurType.THREE_PASS_BOX);
+	    dropShadow.setColor(Color.web("rgba(255, 143, 163, 0.4)"));
+	    dropShadow.setRadius(15);
+	    dropShadow.setOffsetX(0);
+	    dropShadow.setOffsetY(8);
+	    rect.setEffect(dropShadow);
+	}
+
+
 }
