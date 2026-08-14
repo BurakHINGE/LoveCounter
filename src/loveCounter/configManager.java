@@ -1,6 +1,7 @@
 package loveCounter;
 
 import java.io.File;
+import java.util.Locale;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,12 +16,14 @@ public class configManager {
 	public static int strokeCatCount;
 	public static int hugCount;
 	public static int waterCount;
+	public static double dailyWaterAim;
 	
 	public void loadConfig() {
 		try {
 			
 			File config = new File("data/config.txt");
 			Scanner output = new Scanner(config);
+			output.useLocale(Locale.US);
 			
 			while (output.hasNext()) {
 				String configName = output.next();
@@ -43,6 +46,9 @@ public class configManager {
 				else if (configName.equals("water_count:")) {
 					waterCount = output.nextInt();
 				}
+				else if (configName.equals("daily_water_aim:")) {
+					dailyWaterAim = output.nextDouble();
+				}
 			}
 			System.out.println("config.txt başarıyla okundu.");
 		}
@@ -63,6 +69,7 @@ public class configManager {
             printWriter.println("stroke_cat_count: " + strokeCatCount);
             printWriter.println("hug_count: " + hugCount);
             printWriter.println("water_count: " + waterCount);
+            printWriter.println("daily_water_aim: " + dailyWaterAim);
             
             printWriter.close();
             System.out.println("Veriler config.txt dosyasına başarıyla kaydedildi.");
@@ -97,6 +104,10 @@ public class configManager {
 		return waterCount;
 	}
 
+	public static double getDailyWaterAim() {
+		return dailyWaterAim;
+	}
+	
 	public static void setCoffeeCount(int coffeeCount) {
 		configManager.coffeeCount = coffeeCount;
 	}
@@ -119,5 +130,9 @@ public class configManager {
 	
 	public static void setWaterCount(int waterCount) {
 		configManager.waterCount = waterCount;
+	}
+	
+	public static void setDailyWaterAim(double dailyWaterAim) {
+		configManager.dailyWaterAim = dailyWaterAim;
 	}
 }
