@@ -175,13 +175,13 @@ public class UIManager {
         toDoLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", toDoButton.widthProperty().divide(10).asString(), "px"));
         exitLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", toDoButton.widthProperty().divide(10).asString(), "px"));
 		
-        applyCountButtonStyle(coffeeButton, coffeeLabel);
-        applyCountButtonStyle(tripButton, tripLabel);
-        applyCountButtonStyle(catButton, catLabel);
-        applyCountButtonStyle(beatButton, beatLabel);
-        applyCountButtonStyle(hugButton, hugLabel);
-        applyCountButtonStyle(waterButton, waterLabel);
-        applyCountButtonStyle(toDoButton, toDoLabel);
+        applyCountButtonStyle(coffeeButton, coffeeLabel, 8);
+        applyCountButtonStyle(tripButton, tripLabel, 8);
+        applyCountButtonStyle(catButton, catLabel, 8);
+        applyCountButtonStyle(beatButton, beatLabel, 8);
+        applyCountButtonStyle(hugButton, hugLabel, 8);
+        applyCountButtonStyle(waterButton, waterLabel, 8);
+        applyCountButtonStyle(toDoButton, toDoLabel, 8);
         applyButton74Style(exitButton, exitLabel);
 
         StackPane.setMargin(exitLabel, new Insets(15, 0, 0, 0));
@@ -237,8 +237,8 @@ public class UIManager {
 		setButtonSizes(increase);
 		setButtonSizes(decrease);
 		
-		applyCountButtonStyle(increase, incLabel);
-		applyCountButtonStyle(decrease, decLabel);
+		applyCountButtonStyle(increase, incLabel, 8);
+		applyCountButtonStyle(decrease, decLabel, 8);
 		
 		applyRectangleStyle(mainRec);
 		
@@ -296,8 +296,8 @@ public class UIManager {
 		setButtonSizes(increase);
 		setButtonSizes(decrease);
 		
-		applyCountButtonStyle(increase, incLabel);
-		applyCountButtonStyle(decrease, decLabel);
+		applyCountButtonStyle(increase, incLabel, 8);
+		applyCountButtonStyle(decrease, decLabel, 8);
 		
 		applyRectangleStyle(mainRec);
 		
@@ -355,8 +355,8 @@ public class UIManager {
 		setButtonSizes(increase);
 		setButtonSizes(decrease);
 		
-		applyCountButtonStyle(increase, incLabel);
-		applyCountButtonStyle(decrease, decLabel);
+		applyCountButtonStyle(increase, incLabel, 8);
+		applyCountButtonStyle(decrease, decLabel, 8);
 		
 		applyRectangleStyle(mainRec);
 		
@@ -414,8 +414,8 @@ public class UIManager {
 		setButtonSizes(increase);
 		setButtonSizes(decrease);
 		
-		applyCountButtonStyle(increase, incLabel);
-		applyCountButtonStyle(decrease, decLabel);
+		applyCountButtonStyle(increase, incLabel, 8);
+		applyCountButtonStyle(decrease, decLabel, 8);
 		
 		applyRectangleStyle(mainRec);
 		
@@ -473,8 +473,8 @@ public class UIManager {
 		setButtonSizes(increase);
 		setButtonSizes(decrease);
 		
-		applyCountButtonStyle(increase, incLabel);
-		applyCountButtonStyle(decrease, decLabel);
+		applyCountButtonStyle(increase, incLabel, 8);
+		applyCountButtonStyle(decrease, decLabel, 8);
 		
 		applyRectangleStyle(mainRec);
 		
@@ -593,14 +593,14 @@ public class UIManager {
 		setButtonSizes(decml500);
 		setButtonSizes(decl1);
 		
-		applyCountButtonStyle(incml100, incLml100);
-		applyCountButtonStyle(incml200, incLml200);
-		applyCountButtonStyle(incml500, incLml500);
-		applyCountButtonStyle(incl1, incLl1);
-		applyCountButtonStyle(decml100, decLml100);
-		applyCountButtonStyle(decml200, decLml200);
-		applyCountButtonStyle(decml500, decLml500);
-		applyCountButtonStyle(decl1, decLl1);
+		applyCountButtonStyle(incml100, incLml100, 15);
+		applyCountButtonStyle(incml200, incLml200, 15);
+		applyCountButtonStyle(incml500, incLml500, 15);
+		applyCountButtonStyle(incl1, incLl1, 15);
+		applyCountButtonStyle(decml100, decLml100, 15);
+		applyCountButtonStyle(decml200, decLml200, 15);
+		applyCountButtonStyle(decml500, decLml500, 15);
+		applyCountButtonStyle(decl1, decLl1, 15);
 		
 		applyRectangleStyle(mainRec);
 		
@@ -610,9 +610,21 @@ public class UIManager {
 		layer.add(mBox, 2, 0);
 		layer.add(mainLayout, 1, 0);
 	
-		plus.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", increase.heightProperty().divide(4).asString(), "px"));
-		minius.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", decrease.heightProperty().divide(4).asString(), "px"));
+		plus.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", increase.heightProperty().divide(2).asString(), "px"));
+		minius.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", decrease.heightProperty().divide(2).asString(), "px"));
 		mainLab.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", mainRec.widthProperty().divide(4).asString(), "px"));
+		incLml100.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", incml100.heightProperty().divide(4).asString(), "px"));
+		incLml200.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", incml200.heightProperty().divide(4).asString(), "px"));
+		incLml500.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", incml500.heightProperty().divide(4).asString(), "px"));
+		incLl1.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", incl1.heightProperty().divide(4).asString(), "px"));
+		decLml100.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", decml100.heightProperty().divide(4).asString(), "px"));
+		decLml200.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", decml200.heightProperty().divide(4).asString(), "px"));
+		decLml500.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", decml500.heightProperty().divide(4).asString(), "px"));
+		decLl1.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", decl1.heightProperty().divide(4).asString(), "px"));
+		plus.setTranslateY(12);
+		minius.setTranslateY(12);
+		mainLab.setTranslateY(30);
+		
 		
 		StackPane waterLayer = new StackPane();
 		waterLayer.setAlignment(Pos.CENTER);
@@ -766,8 +778,8 @@ public class UIManager {
 	    button.setOnMousePressed(e -> {
 	        button.setTranslateX(2);
 	        button.setTranslateY(2);
-	        label.setTranslateX(2); // Sağa kayma
-	        label.setTranslateY(2 + fontOffset); // Aşağı kayma
+	        label.setTranslateX(2); 
+	        label.setTranslateY(2 + fontOffset); 
 	        shadow.setOffsetX(2);
 	        shadow.setOffsetY(2);
 	    });
@@ -776,14 +788,14 @@ public class UIManager {
 	        button.setTranslateX(0);
 	        button.setTranslateY(0);
 	        label.setTranslateX(0);
-	        label.setTranslateY(fontOffset);
+	        label.setTranslateY(fontOffset); // Eski konumuna dönmesi için
 	        shadow.setOffsetX(4);
 	        shadow.setOffsetY(4);
 	    });
 	}
 
 
-	private void applyCountButtonStyle(Button button, Label label) {
+	private void applyCountButtonStyle(Button button, Label label, double fontOffset) {
 	    String defaultStyle = "-fx-background-color: #fff0f0; " +
 	                          "-fx-border-color: #b18597; " +
 	                          "-fx-border-width: 2px; " +
@@ -823,14 +835,13 @@ public class UIManager {
 	    depthShadow.setInput(borderShadow);
 	    button.setEffect(depthShadow);
 
-	    // Fontun yukarıda durmasını engellemek için ince ayar (Örn: 4 piksel aşağı itiyoruz)
-	    int fontOffset = 8; 
+	    // Parametre olarak gelen fontOffset'i kullanıyoruz
 	    label.setTranslateY(fontOffset);
 
 	    button.setOnMouseEntered(e -> {
 	        button.setStyle(hoverStyle);
 	        button.setTranslateY(2);
-	        label.setTranslateY(2 + fontOffset); // Yazı da butonla hareket etsin
+	        label.setTranslateY(2 + fontOffset); // Doğru konumdan hareket edecek
 	        depthShadow.setOffsetY(8);
 	        borderShadow.setOffsetY(10);
 	    });
@@ -838,7 +849,7 @@ public class UIManager {
 	    button.setOnMouseExited(e -> {
 	        button.setStyle(defaultStyle);
 	        button.setTranslateY(0);
-	        label.setTranslateY(fontOffset); // Eski konumuna dönsün
+	        label.setTranslateY(fontOffset); // Doğru konuma geri dönecek
 	        depthShadow.setOffsetY(10);
 	        borderShadow.setOffsetY(12);
 	    });
@@ -846,7 +857,7 @@ public class UIManager {
 	    button.setOnMousePressed(e -> {
 	        button.setStyle(hoverStyle);
 	        button.setTranslateY(12);
-	        label.setTranslateY(12 + fontOffset); // Yazı butonla beraber tamamen çöksün
+	        label.setTranslateY(12 + fontOffset);
 	        depthShadow.setOffsetY(0);
 	        borderShadow.setOffsetY(0);
 	    });
@@ -858,6 +869,7 @@ public class UIManager {
 	        borderShadow.setOffsetY(10);
 	    });
 	}
+
 	
 	private void applyRectangleStyle(Rectangle rect) {
 	    // 1. Arka Plan Gradient (Doğrusal Renk Geçişi)
