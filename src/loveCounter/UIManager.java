@@ -6,27 +6,27 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.animation.Interpolator;
+import javafx.util.Duration;
+import javafx.beans.binding.DoubleBinding;
+
 
 public class UIManager {
 
@@ -159,7 +159,7 @@ public class UIManager {
         
         coffeeLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", coffeeButton.heightProperty().divide(3).asString(), "px"));
         tripLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", tripButton.heightProperty().divide(3).asString(), "px"));
-        catLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"; -fx-font-size: ", catButton.heightProperty().divide(3).asString(), "px"));
+        catLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", catButton.heightProperty().divide(3).asString(), "px"));
         beatLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", coffeeButton.heightProperty().divide(3).asString(), "px"));
         hugLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", hugButton.heightProperty().divide(3).asString(), "px"));
         waterLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", waterButton.heightProperty().divide(3).asString(), "px"));
@@ -511,8 +511,79 @@ public class UIManager {
 		layer.setPickOnBounds(false);
 		
 		StackPane mainLayout = new StackPane();
-		Rectangle mainRec = new Rectangle(300, 300);
+		
 		Label mainLab = new Label(""+configManager.getWaterCount());
+		
+		double baslangicHedefi = configManager.getDailyWaterAim();
+		if (baslangicHedefi <= 0) {
+		    baslangicHedefi = 2000.0;
+		    configManager.setDailyWaterAim(2000.0); // Config'i de düzeltiyoruz
+		}
+		
+		TextField aimInfo = new TextField();
+		aimInfo.setText(String.valueOf(baslangicHedefi));
+		aimInfo.setMaxWidth(80); // Kutunun genişliğini kısıtlıyoruz ki çok uzun olmasın
+		aimInfo.setAlignment(Pos.CENTER); // Yazıyı ortalıyoruz
+		aimInfo.setStyle("-fx-background-color: #ffffff; -fx-border-color: #b18597; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-font-weight: bold;");
+		aimInfo.setTranslateY(-150);
+
+		// Dinleyici: Kutudaki yazı her değiştiğinde tetiklenir
+		aimInfo.textProperty().addListener((observable, oldValue, newValue) -> {
+		    // Hem rakamlara hem de tek bir ondalık noktaya izin veren Regex kuralı
+		    if (!newValue.matches("\\d*(\\.\\d*)?")) {
+		        // Eğer geçersiz harf vs. girilirse, sadece rakam ve noktayı bırak
+		        aimInfo.setText(newValue.replaceAll("[^\\d.]", ""));
+		    } else if (!newValue.isEmpty() && !newValue.equals(".")) {
+		        // Kutu tamamen boş değilse ve sadece "." girilmediyse config'i anında güncelle
+		        configManager.setDailyWaterAim(Double.parseDouble(newValue));
+		    }
+		});
+
+		// Bardağın Dış Çerçevesi
+		Polygon glass = new Polygon(0.0, 0.0, 300.0, 0.0, 225.0, 400.0, 75.0, 400.0);
+		glass.setFill(Color.web("#ffffff", 0.1));
+		glass.setStroke(Color.web("#b18597"));
+		glass.setStrokeWidth(3);
+
+		// Suyun ve Maskenin Doğru Sıralaması
+		Rectangle waterMask = new Rectangle(300, 400);
+		Polygon water = new Polygon(0.0, 0.0, 300.0, 0.0, 225.0, 400.0, 75.0, 400.0);
+		water.setFill(Color.web("#82c4ff"));
+		water.setClip(waterMask);
+
+		// GÜNCELLENMİŞ BINDING: Artık hem içilen suyu hem de hedefi dinliyor
+		DoubleBinding targetYBinding = Bindings.createDoubleBinding(() -> {
+		    try {
+		        String temizSuMetni = mainLab.getText().replaceAll("[^\\d.]", "");
+		        double availableWater = temizSuMetni.isEmpty() ? 0.0 : Double.parseDouble(temizSuMetni);
+		        
+		        double currentAim = aimInfo.getText().isEmpty() ? 1.0 : Double.parseDouble(aimInfo.getText());
+		        if (currentAim == 0) currentAim = 1.0; 
+
+		        double newYCoordinate = 400 - ((availableWater / currentAim) * 400);
+		        return Math.max(0.0, newYCoordinate); 
+		        
+		    } catch (Exception e) {
+		        return 400.0; 
+		    }
+		}, mainLab.textProperty(), aimInfo.textProperty());
+
+		// 2. İLK AÇILIŞ: Menüye ilk girildiğinde su anında doğru hizada başlasın (Açılışta anlamsız animasyon olmasın)
+		waterMask.setTranslateY(targetYBinding.get());
+
+		// 3. ANİMASYON TETİKLEYİCİSİ: Hedef veya İçilen Su değiştiğinde animasyonu başlat
+		targetYBinding.addListener((observable, oldValue, newValue) -> {
+		    Timeline timeline = new Timeline();
+		    
+		    // KeyValue: Hangi özellik değişecek (translateY), Hangi değere gidecek (newValue), Nasıl gidecek (Yumuşak - EASE_BOTH)
+		    KeyValue kv = new KeyValue(waterMask.translateYProperty(), newValue, Interpolator.EASE_BOTH);
+		    
+		    // KeyFrame: Bu değişim ne kadar sürecek? (500 milisaniye yani yarım saniye)
+		    KeyFrame kf = new KeyFrame(Duration.millis(500), kv);
+		    
+		    timeline.getKeyFrames().add(kf);
+		    timeline.play(); // Animasyonu oynat!
+		});
 		
 		StackPane plusPane = new StackPane();
 		StackPane miniusPane = new StackPane();
@@ -602,9 +673,7 @@ public class UIManager {
 		applyCountButtonStyle(decml500, decLml500, 15);
 		applyCountButtonStyle(decl1, decLl1, 15);
 		
-		applyRectangleStyle(mainRec);
-		
-		mainLayout.getChildren().addAll(mainRec, mainLab);
+		mainLayout.getChildren().addAll(water, glass, mainLab, aimInfo);
 		
 		layer.add(pBox, 0, 0);
 		layer.add(mBox, 2, 0);
@@ -612,7 +681,6 @@ public class UIManager {
 	
 		plus.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", increase.heightProperty().divide(2).asString(), "px"));
 		minius.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", decrease.heightProperty().divide(2).asString(), "px"));
-		mainLab.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", mainRec.widthProperty().divide(4).asString(), "px"));
 		incLml100.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", incml100.heightProperty().divide(4).asString(), "px"));
 		incLml200.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", incml200.heightProperty().divide(4).asString(), "px"));
 		incLml500.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", incml500.heightProperty().divide(4).asString(), "px"));
@@ -624,7 +692,8 @@ public class UIManager {
 		plus.setTranslateY(12);
 		minius.setTranslateY(12);
 		mainLab.setTranslateY(30);
-		
+		glass.setTranslateY(50);
+		water.setTranslateY(50);
 		
 		StackPane waterLayer = new StackPane();
 		waterLayer.setAlignment(Pos.CENTER);
@@ -897,6 +966,5 @@ public class UIManager {
 	    dropShadow.setOffsetY(8);
 	    rect.setEffect(dropShadow);
 	}
-
 
 }
