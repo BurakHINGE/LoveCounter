@@ -7,16 +7,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class configManager {
 
-	public static int coffeeCount;
-	public static int tripCount;
-	public static int beatCount;
-	public static int strokeCatCount;
-	public static int hugCount;
-	public static int waterCount;
-	public static double dailyWaterAim;
+	private static int coffeeCount;
+	private static int tripCount;
+	private static int beatCount;
+	private static int strokeCatCount;
+	private static int hugCount;
+	private static int waterCount;
+	private static double dailyWaterAim;
+	private static String lastLoginDate;
 	
 	public void loadConfig() {
 		try {
@@ -49,8 +51,20 @@ public class configManager {
 				else if (configName.equals("daily_water_aim:")) {
 					dailyWaterAim = output.nextDouble();
 				}
+				else if (configName.equals("last_login_date:")) {
+					lastLoginDate = output.next();
+				}
 			}
 			System.out.println("config.txt başarıyla okundu.");
+			
+			String today = LocalDate.now().toString();
+			
+			if (lastLoginDate == null || !lastLoginDate.equals(today)) {
+				System.out.println("Yeni bir gün tespit edildi! Su sayacı sıfırlanıyor...");
+				waterCount = 0;
+				lastLoginDate = today;
+				saveConfig(); 
+			}
 		}
 		catch (FileNotFoundException e) {
 			System.out.println("Warning: config.txt file cannot find! Please check the file path.");
@@ -70,6 +84,7 @@ public class configManager {
             printWriter.println("hug_count: " + hugCount);
             printWriter.println("water_count: " + waterCount);
             printWriter.println("daily_water_aim: " + dailyWaterAim);
+            printWriter.println("last_login_date: " + lastLoginDate);
             
             printWriter.close();
             System.out.println("Veriler config.txt dosyasına başarıyla kaydedildi.");
@@ -108,6 +123,10 @@ public class configManager {
 		return dailyWaterAim;
 	}
 	
+	public static String getLastLoginDate() {
+		return lastLoginDate;
+	}
+	
 	public static void setCoffeeCount(int coffeeCount) {
 		configManager.coffeeCount = coffeeCount;
 	}
@@ -134,5 +153,9 @@ public class configManager {
 	
 	public static void setDailyWaterAim(double dailyWaterAim) {
 		configManager.dailyWaterAim = dailyWaterAim;
+	}
+	
+	public static void setLastLoginDate(String lastLoginDate) {
+		configManager.lastLoginDate = lastLoginDate;
 	}
 }
