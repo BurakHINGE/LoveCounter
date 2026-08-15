@@ -249,6 +249,11 @@ public class UIManager {
 		Rectangle mainRec = new Rectangle(300, 300);
 		Label mainLab = new Label(""+configManager.getCoffeeCount());
 		
+		Label coffeeLab = new Label("Coffee Counter");
+		coffeeLab.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", "48px"));
+		StackPane.setAlignment(coffeeLab, Pos.TOP_CENTER);
+		coffeeLab.setPadding(new Insets(175, 0, 0, 0));
+		
 		Button increase = new Button();
 		Button decrease = new Button();
 		
@@ -285,11 +290,13 @@ public class UIManager {
 		
 		StackPane coffeeLayer = new StackPane();
 		coffeeLayer.setAlignment(Pos.CENTER);
-
 		coffeeLayer.prefWidthProperty().bind(stage.widthProperty());
 		coffeeLayer.prefHeightProperty().bind(stage.heightProperty());
 		coffeeLayer.setStyle("-fx-background-color: #FFD1DC;");
-		coffeeLayer.getChildren().addAll(returnMenu(), layer);
+		
+		
+		
+		coffeeLayer.getChildren().addAll(returnMenu(), layer, coffeeLab);
 		
 		counterManager.coffeeCountManager(increase, decrease, mainLab);
 		
@@ -307,6 +314,11 @@ public class UIManager {
 		StackPane mainLayout = new StackPane();
 		Rectangle mainRec = new Rectangle(300, 300);
 		Label mainLab = new Label(""+configManager.getTripCount());
+		
+		Label tripLab = new Label("Trip Counter");
+		tripLab.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", "48px"));
+		StackPane.setAlignment(tripLab, Pos.TOP_CENTER);
+		tripLab.setPadding(new Insets(175, 0, 0, 0));
 		
 		Button increase = new Button();
 		Button decrease = new Button();
@@ -348,7 +360,7 @@ public class UIManager {
 		tripLayer.prefWidthProperty().bind(stage.widthProperty());
 		tripLayer.prefHeightProperty().bind(stage.heightProperty());
 		tripLayer.setStyle("-fx-background-color: #FFD1DC;");
-		tripLayer.getChildren().addAll(returnMenu(), layer);
+		tripLayer.getChildren().addAll(returnMenu(), layer, tripLab);
 		
 		counterManager.tripCountManager(increase, decrease, mainLab);
 		
@@ -366,6 +378,11 @@ public class UIManager {
 		StackPane mainLayout = new StackPane();
 		Rectangle mainRec = new Rectangle(300, 300);
 		Label mainLab = new Label(""+configManager.getStrokeCatCount());
+		
+		Label strokeCatLab = new Label("Cat Counter");
+		strokeCatLab.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", "48px"));
+		StackPane.setAlignment(strokeCatLab, Pos.TOP_CENTER);
+		strokeCatLab.setPadding(new Insets(175, 0, 0, 0));
 		
 		Button increase = new Button();
 		Button decrease = new Button();
@@ -407,7 +424,7 @@ public class UIManager {
 		strokeCatLayer.prefWidthProperty().bind(stage.widthProperty());
 		strokeCatLayer.prefHeightProperty().bind(stage.heightProperty());
 		strokeCatLayer.setStyle("-fx-background-color: #FFD1DC;");
-		strokeCatLayer.getChildren().addAll(returnMenu(), layer);
+		strokeCatLayer.getChildren().addAll(returnMenu(), layer, strokeCatLab);
 		
 		counterManager.strokeCatCountManager(increase, decrease, mainLab);
 		
@@ -425,6 +442,11 @@ public class UIManager {
 		StackPane mainLayout = new StackPane();
 		Rectangle mainRec = new Rectangle(300, 300);
 		Label mainLab = new Label(""+configManager.getBeatCount());
+		
+		Label beatLab = new Label("Beat Counter");
+		beatLab.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", "48px"));
+		StackPane.setAlignment(beatLab, Pos.TOP_CENTER);
+		beatLab.setPadding(new Insets(175, 0, 0, 0));
 		
 		Button increase = new Button();
 		Button decrease = new Button();
@@ -466,7 +488,7 @@ public class UIManager {
 		beatLayer.prefWidthProperty().bind(stage.widthProperty());
 		beatLayer.prefHeightProperty().bind(stage.heightProperty());
 		beatLayer.setStyle("-fx-background-color: #FFD1DC;");
-		beatLayer.getChildren().addAll(returnMenu(), layer);
+		beatLayer.getChildren().addAll(returnMenu(), layer, beatLab);
 		
 		counterManager.beatCountManager(increase, decrease, mainLab);
 		
@@ -484,6 +506,11 @@ public class UIManager {
 		StackPane mainLayout = new StackPane();
 		Rectangle mainRec = new Rectangle(300, 300);
 		Label mainLab = new Label(""+configManager.getHugCount());
+		
+		Label hugLab = new Label("Hug Counter");
+		hugLab.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", "48px"));
+		StackPane.setAlignment(hugLab, Pos.TOP_CENTER);
+		hugLab.setPadding(new Insets(175, 0, 0, 0));
 		
 		Button increase = new Button();
 		Button decrease = new Button();
@@ -525,7 +552,7 @@ public class UIManager {
 		hugLayer.prefWidthProperty().bind(stage.widthProperty());
 		hugLayer.prefHeightProperty().bind(stage.heightProperty());
 		hugLayer.setStyle("-fx-background-color: #FFD1DC;");
-		hugLayer.getChildren().addAll(returnMenu(), layer);
+		hugLayer.getChildren().addAll(returnMenu(), layer, hugLab);
 		
 		counterManager.hugCountManager(increase, decrease, mainLab);
 		
@@ -541,8 +568,12 @@ public class UIManager {
 		layer.setPickOnBounds(false);
 		
 		StackPane mainLayout = new StackPane();
-		
 		Label mainLab = new Label(""+configManager.getWaterCount());
+		
+		Label waterLab = new Label("Water Counter");
+		waterLab.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", "48px"));
+		StackPane.setAlignment(waterLab, Pos.TOP_CENTER);
+		waterLab.setPadding(new Insets(175, 0, 0, 0));
 		
 		double baslangicHedefi = configManager.getDailyWaterAim();
 		if (baslangicHedefi <= 0) {
@@ -730,7 +761,7 @@ public class UIManager {
 		waterLayer.prefWidthProperty().bind(stage.widthProperty());
 		waterLayer.prefHeightProperty().bind(stage.heightProperty());
 		waterLayer.setStyle("-fx-background-color: #FFD1DC;");
-		waterLayer.getChildren().addAll(returnMenu(), layer);
+		waterLayer.getChildren().addAll(returnMenu(), layer, waterLab);
 		
 		counterManager.waterCountManager(incml100, incml200, incml500, incl1, decml100, decml200, decml500, decl1, mainLab);
 		
