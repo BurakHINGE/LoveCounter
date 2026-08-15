@@ -4,4 +4,5 @@ beat_count: 0
 stroke_cat_count: 0
 hug_count: 0
 water_count: 0
-daily_water_aim: 3000.0
+daily_water_aim: 2000.0
+last_login_date: 2026-08-15
