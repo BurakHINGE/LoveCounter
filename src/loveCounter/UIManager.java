@@ -26,7 +26,7 @@ import javafx.animation.Timeline;
 import javafx.animation.Interpolator;
 import javafx.util.Duration;
 import javafx.beans.binding.DoubleBinding;
-
+import java.time.LocalTime;
 
 public class UIManager {
 
@@ -186,6 +186,37 @@ public class UIManager {
 
         StackPane.setMargin(exitLabel, new Insets(15, 0, 0, 0));
         
+        Label timeLabel = new Label();
+
+        timeLabel.styleProperty().bind(Bindings.concat(
+            "-fx-text-fill: #422800; -fx-font-weight: bold; ",
+            "-fx-font-family: '", customFontFamily, "'; -fx-font-size: 32px;"
+        ));
+
+        timeLabel.setTranslateY(18); 
+
+        StackPane timePane = new StackPane(timeLabel);
+        timePane.setStyle(
+            "-fx-background-color: #fbeee0; -fx-border-color: #422800; -fx-border-width: 2px; " +
+            "-fx-border-radius: 12px; -fx-background-radius: 12px;"
+        );
+
+        timePane.setPadding(new Insets(0, 15, 0, 15));
+        timePane.setMaxHeight(45);
+        timePane.setMaxWidth(StackPane.USE_PREF_SIZE);    
+        
+        StackPane.setAlignment(timePane, Pos.TOP_RIGHT);
+        StackPane.setMargin(timePane, new Insets(40, 40, 0, 0));
+        timePane.setPickOnBounds(false);
+
+        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            LocalTime time = LocalTime.now();
+            timeLabel.setText(String.format("%02d:%02d:%02d", time.getHour(), time.getMinute(), time.getSecond()));
+        }), new KeyFrame(Duration.seconds(1)));
+        
+        clock.setCycleCount(Timeline.INDEFINITE);
+        clock.play();
+        
 		coffeeButton.setOnAction(e -> showLayer(coffeeMenu()));
 		tripButton.setOnAction(e -> showLayer(tripMenu()));
 		catButton.setOnAction(e -> showLayer(strokeCatMenu()));
@@ -197,12 +228,11 @@ public class UIManager {
 		    configManager.saveConfig();
 		    System.exit(0);
 		});
-
 		
 		stage.setFullScreen(true);
 		stage.setFullScreenExitHint("");
 		
-		baseLayout.getChildren().addAll(mainPane, exitPane);
+		baseLayout.getChildren().addAll(mainPane, exitPane, timePane);
 		
 		return baseLayout;
 	}
