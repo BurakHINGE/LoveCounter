@@ -9,6 +9,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -70,7 +77,6 @@ public class UIManager {
 	public StackPane createMainMenu() {
 		
 		StackPane baseLayout = new StackPane();
-		baseLayout.setStyle("-fx-background-color: #FFD1DC;");
 		baseLayout.prefWidthProperty().bind(stage.widthProperty());
 		baseLayout.prefHeightProperty().bind(stage.heightProperty());
 		
@@ -79,13 +85,19 @@ public class UIManager {
 		mainPane.setHgap(40);
 		mainPane.setVgap(40);
 		
+		baseLayout.setStyle(
+			    "-fx-background-color: #FFD1DC; " +
+			    "-fx-background-image: url('file:resources/pictures/mainMenuBackground.png'); " +
+			    "-fx-background-size: cover; " +
+			    "-fx-background-position: center;"
+			);
+		
 		Button coffeeButton = new Button();
 		Button tripButton = new Button();
 		Button catButton = new Button();
 		Button beatButton = new Button();
 		Button hugButton = new Button();
 		Button waterButton = new Button();
-		Button toDoButton = new Button();
 		Button exitButton = new Button();
 		
 		Label coffeeLabel = new Label("Coffee Counter");
@@ -94,7 +106,6 @@ public class UIManager {
 		Label beatLabel = new Label("Beat Counter");
 		Label hugLabel = new Label("Hug Counter");
 		Label waterLabel = new Label("Water Counter");
-		Label toDoLabel = new Label("To-Do List");
 		Label exitLabel = new Label("Çıkış");
 		
 		StackPane coffeePane = new StackPane();
@@ -103,7 +114,6 @@ public class UIManager {
 		StackPane beatPane = new StackPane();
 		StackPane hugPane = new StackPane();
 		StackPane waterPane = new StackPane();
-		StackPane toDoPane = new StackPane();
 		StackPane exitPane = new StackPane();
 		
 		coffeePane.getChildren().addAll(coffeeButton, coffeeLabel);
@@ -112,16 +122,14 @@ public class UIManager {
 		beatPane.getChildren().addAll(beatButton, beatLabel);
 		hugPane.getChildren().addAll(hugButton, hugLabel);
 		waterPane.getChildren().addAll(waterButton, waterLabel);
-		toDoPane.getChildren().addAll(toDoButton, toDoLabel);
 		exitPane.getChildren().addAll(exitButton, exitLabel);
 		
 		mainPane.add(coffeePane, 0, 0);
 		mainPane.add(tripPane, 1, 0);
 		mainPane.add(catPane, 2, 0);
-		mainPane.add(beatPane, 3, 0);
-		mainPane.add(hugPane, 0, 1);
-		mainPane.add(waterPane, 1, 1);
-		mainPane.add(toDoPane, 2, 1);
+		mainPane.add(beatPane, 0, 1);
+		mainPane.add(hugPane, 1, 1);
+		mainPane.add(waterPane, 2, 1);
 		
 		exitPane.setAlignment(Pos.CENTER);
 		exitPane.setMaxWidth(StackPane.USE_PREF_SIZE);
@@ -136,7 +144,6 @@ public class UIManager {
 		beatLabel.setMouseTransparent(true);
 		hugLabel.setMouseTransparent(true);
 		waterLabel.setMouseTransparent(true);
-		toDoLabel.setMouseTransparent(true);
 		exitLabel.setMouseTransparent(true);
 		
 		coffeeButton.prefWidthProperty().bind(stage.widthProperty().divide(6));
@@ -145,7 +152,6 @@ public class UIManager {
 		beatButton.prefWidthProperty().bind(stage.widthProperty().divide(6));
 		hugButton.prefWidthProperty().bind(stage.widthProperty().divide(6));
 		waterButton.prefWidthProperty().bind(stage.widthProperty().divide(6));
-		toDoButton.prefWidthProperty().bind(stage.widthProperty().divide(6));
 		exitButton.prefWidthProperty().bind(stage.widthProperty().divide(6));
 
         coffeeButton.prefHeightProperty().bind(stage.heightProperty().divide(10));
@@ -154,7 +160,6 @@ public class UIManager {
         beatButton.prefHeightProperty().bind(stage.heightProperty().divide(10));
         hugButton.prefHeightProperty().bind(stage.heightProperty().divide(10));
         waterButton.prefHeightProperty().bind(stage.heightProperty().divide(10));
-        toDoButton.prefHeightProperty().bind(stage.heightProperty().divide(10));
         exitButton.prefHeightProperty().bind(stage.heightProperty().divide(10));
         
         coffeeLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", coffeeButton.heightProperty().divide(3).asString(), "px"));
@@ -163,8 +168,7 @@ public class UIManager {
         beatLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", coffeeButton.heightProperty().divide(3).asString(), "px"));
         hugLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", hugButton.heightProperty().divide(3).asString(), "px"));
         waterLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", waterButton.heightProperty().divide(3).asString(), "px"));
-        toDoLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", toDoButton.heightProperty().divide(3).asString(), "px"));
-        exitLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", toDoButton.heightProperty().divide(3).asString(), "px"));
+        exitLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", exitButton.heightProperty().divide(3).asString(), "px"));
         
         coffeeLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", coffeeButton.widthProperty().divide(10).asString(), "px"));
         tripLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", tripButton.widthProperty().divide(10).asString(), "px"));
@@ -172,8 +176,7 @@ public class UIManager {
         beatLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", catButton.widthProperty().divide(10).asString(), "px"));
         hugLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", hugButton.widthProperty().divide(10).asString(), "px"));
         waterLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", waterButton.widthProperty().divide(10).asString(), "px"));
-        toDoLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", toDoButton.widthProperty().divide(10).asString(), "px"));
-        exitLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", toDoButton.widthProperty().divide(10).asString(), "px"));
+        exitLabel.styleProperty().bind(Bindings.concat("-fx-font-family: '", customFontFamily,"'; -fx-font-size: ", exitButton.widthProperty().divide(10).asString(), "px"));
 		
         applyCountButtonStyle(coffeeButton, coffeeLabel, 8);
         applyCountButtonStyle(tripButton, tripLabel, 8);
@@ -181,7 +184,6 @@ public class UIManager {
         applyCountButtonStyle(beatButton, beatLabel, 8);
         applyCountButtonStyle(hugButton, hugLabel, 8);
         applyCountButtonStyle(waterButton, waterLabel, 8);
-        applyCountButtonStyle(toDoButton, toDoLabel, 8);
         applyButton74Style(exitButton, exitLabel);
 
         StackPane.setMargin(exitLabel, new Insets(15, 0, 0, 0));
@@ -223,7 +225,6 @@ public class UIManager {
 		beatButton.setOnAction(e -> showLayer(beatMenu()));
 		hugButton.setOnAction(e -> showLayer(hugMenu()));
 		waterButton.setOnAction(e -> showLayer(waterMenu()));
-//		toDoButton.setOnAction(e -> switchScene(hugMenu()));
 		exitButton.setOnAction(e -> {
 		    configManager.saveConfig();
 		    System.exit(0);
@@ -292,10 +293,14 @@ public class UIManager {
 		coffeeLayer.setAlignment(Pos.CENTER);
 		coffeeLayer.prefWidthProperty().bind(stage.widthProperty());
 		coffeeLayer.prefHeightProperty().bind(stage.heightProperty());
-		coffeeLayer.setStyle("-fx-background-color: #FFD1DC;");
-		
-		
-		
+
+		coffeeLayer.setStyle(
+			    "-fx-background-color: #FFD1DC; " +
+			    "-fx-background-image: url('file:resources/pictures/coffeeMenuBackground.png'); " +
+			    "-fx-background-size: cover; " +
+			    "-fx-background-position: center;"
+			);
+
 		coffeeLayer.getChildren().addAll(returnMenu(), layer, coffeeLab);
 		
 		counterManager.coffeeCountManager(increase, decrease, mainLab);
@@ -359,7 +364,14 @@ public class UIManager {
 
 		tripLayer.prefWidthProperty().bind(stage.widthProperty());
 		tripLayer.prefHeightProperty().bind(stage.heightProperty());
-		tripLayer.setStyle("-fx-background-color: #FFD1DC;");
+		
+		tripLayer.setStyle(
+			    "-fx-background-color: #FFD1DC; " +
+			    "-fx-background-image: url('file:resources/pictures/tripMenuBackground.png'); " +
+			    "-fx-background-size: cover; " +
+			    "-fx-background-position: center;"
+			);
+		
 		tripLayer.getChildren().addAll(returnMenu(), layer, tripLab);
 		
 		counterManager.tripCountManager(increase, decrease, mainLab);
@@ -423,7 +435,14 @@ public class UIManager {
 
 		strokeCatLayer.prefWidthProperty().bind(stage.widthProperty());
 		strokeCatLayer.prefHeightProperty().bind(stage.heightProperty());
-		strokeCatLayer.setStyle("-fx-background-color: #FFD1DC;");
+		
+		strokeCatLayer.setStyle(
+			    "-fx-background-color: #FFD1DC; " +
+			    "-fx-background-image: url('file:resources/pictures/catMenuBackground.png'); " +
+			    "-fx-background-size: cover; " +
+			    "-fx-background-position: center;"
+			);
+		
 		strokeCatLayer.getChildren().addAll(returnMenu(), layer, strokeCatLab);
 		
 		counterManager.strokeCatCountManager(increase, decrease, mainLab);
@@ -488,6 +507,14 @@ public class UIManager {
 		beatLayer.prefWidthProperty().bind(stage.widthProperty());
 		beatLayer.prefHeightProperty().bind(stage.heightProperty());
 		beatLayer.setStyle("-fx-background-color: #FFD1DC;");
+		
+		beatLayer.setStyle(
+			    "-fx-background-color: #FFD1DC; " +
+			    "-fx-background-image: url('file:resources/pictures/beatMenuBackground.png'); " +
+			    "-fx-background-size: cover; " +
+			    "-fx-background-position: center;"
+			);
+		
 		beatLayer.getChildren().addAll(returnMenu(), layer, beatLab);
 		
 		counterManager.beatCountManager(increase, decrease, mainLab);
@@ -551,7 +578,14 @@ public class UIManager {
 
 		hugLayer.prefWidthProperty().bind(stage.widthProperty());
 		hugLayer.prefHeightProperty().bind(stage.heightProperty());
-		hugLayer.setStyle("-fx-background-color: #FFD1DC;");
+		
+		hugLayer.setStyle(
+			    "-fx-background-color: #FFD1DC; " +
+			    "-fx-background-image: url('file:resources/pictures/hugMenuBackground.png'); " +
+			    "-fx-background-size: cover; " +
+			    "-fx-background-position: center;"
+			);
+		
 		hugLayer.getChildren().addAll(returnMenu(), layer, hugLab);
 		
 		counterManager.hugCountManager(increase, decrease, mainLab);
@@ -640,7 +674,7 @@ public class UIManager {
 		    KeyValue kv = new KeyValue(waterMask.translateYProperty(), newValue, Interpolator.EASE_BOTH);
 		    
 		    // KeyFrame: Bu değişim ne kadar sürecek? (500 milisaniye yani yarım saniye)
-		    KeyFrame kf = new KeyFrame(Duration.millis(500), kv);
+		    KeyFrame kf = new KeyFrame(Duration.millis(1000), kv);
 		    
 		    timeline.getKeyFrames().add(kf);
 		    timeline.play(); // Animasyonu oynat!
@@ -760,7 +794,14 @@ public class UIManager {
 		waterLayer.setAlignment(Pos.CENTER);
 		waterLayer.prefWidthProperty().bind(stage.widthProperty());
 		waterLayer.prefHeightProperty().bind(stage.heightProperty());
-		waterLayer.setStyle("-fx-background-color: #FFD1DC;");
+		
+		waterLayer.setStyle(
+			    "-fx-background-color: #FFD1DC; " +
+			    "-fx-background-image: url('file:resources/pictures/waterMenuBackground.png'); " +
+			    "-fx-background-size: cover; " +
+			    "-fx-background-position: center;"
+			);
+		
 		waterLayer.getChildren().addAll(returnMenu(), layer, waterLab);
 		
 		counterManager.waterCountManager(incml100, incml200, incml500, incl1, decml100, decml200, decml500, decl1, mainLab);
@@ -950,55 +991,45 @@ public class UIManager {
 
 	    button.setStyle(defaultStyle);
 
-	    DropShadow depthShadow = new DropShadow();
-	    depthShadow.setRadius(0);
-	    depthShadow.setOffsetX(0);
-	    depthShadow.setOffsetY(10);
-	    depthShadow.setColor(Color.web("#f9c4d2"));
-
-	    DropShadow borderShadow = new DropShadow();
-	    borderShadow.setRadius(0);
-	    borderShadow.setOffsetX(0);
-	    borderShadow.setOffsetY(12);
-	    borderShadow.setColor(Color.web("#b18597"));
+	    // Sorunu çözen kısım: Çift gölge yerine tek, net bir DropShadow 
+	    DropShadow buttonShadow = new DropShadow();
+	    buttonShadow.setRadius(0); // Bulanıklık yok, keskin hatlar
+	    buttonShadow.setOffsetX(0);
+	    buttonShadow.setOffsetY(10); // Butonun 3D derinliği
+	    buttonShadow.setColor(Color.web("#b18597")); // Çerçeveyle aynı koyu pembe renk
 	    
-	    depthShadow.setInput(borderShadow);
-	    button.setEffect(depthShadow);
+	    button.setEffect(buttonShadow);
 
-	    // Parametre olarak gelen fontOffset'i kullanıyoruz
 	    label.setTranslateY(fontOffset);
 
 	    button.setOnMouseEntered(e -> {
 	        button.setStyle(hoverStyle);
 	        button.setTranslateY(2);
-	        label.setTranslateY(2 + fontOffset); // Doğru konumdan hareket edecek
-	        depthShadow.setOffsetY(8);
-	        borderShadow.setOffsetY(10);
+	        label.setTranslateY(2 + fontOffset); 
+	        buttonShadow.setOffsetY(8);
 	    });
 
 	    button.setOnMouseExited(e -> {
 	        button.setStyle(defaultStyle);
 	        button.setTranslateY(0);
-	        label.setTranslateY(fontOffset); // Doğru konuma geri dönecek
-	        depthShadow.setOffsetY(10);
-	        borderShadow.setOffsetY(12);
+	        label.setTranslateY(fontOffset); 
+	        buttonShadow.setOffsetY(10);
 	    });
 
 	    button.setOnMousePressed(e -> {
 	        button.setStyle(hoverStyle);
-	        button.setTranslateY(12);
-	        label.setTranslateY(12 + fontOffset);
-	        depthShadow.setOffsetY(0);
-	        borderShadow.setOffsetY(0);
+	        button.setTranslateY(10);
+	        label.setTranslateY(10 + fontOffset);
+	        buttonShadow.setOffsetY(0); // Basılınca gölge sıfırlanıp zemine oturuyor
 	    });
 
 	    button.setOnMouseReleased(e -> {
 	        button.setTranslateY(2);
 	        label.setTranslateY(2 + fontOffset);
-	        depthShadow.setOffsetY(8);
-	        borderShadow.setOffsetY(10);
+	        buttonShadow.setOffsetY(8);
 	    });
 	}
+
 
 	
 	private void applyRectangleStyle(Rectangle rect) {
