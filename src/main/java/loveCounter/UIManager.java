@@ -9,13 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -45,10 +38,11 @@ public class UIManager {
 	public UIManager(Stage stage) {
         this.stage = stage;
         this.rootLayer = new StackPane();
-        this.rootLayer.setStyle("-fx-background-color: #FFD1DC;");
+        this.rootLayer.setStyle("-fx-background-color: #FFD1DC;"); // Fix background color
         
         String fontPath = "file:resources/fonts/Minecraftia-Regular.ttf";
 
+        // Load Font
         try {
             Font loadedFont = Font.loadFont(fontPath, 14);
             if (loadedFont != null) {
@@ -78,7 +72,7 @@ public class UIManager {
         return mainScene;
     }
 	
-	public StackPane createMainMenu() {
+	public StackPane createMainMenu() { // Main Menu UI
 		
 		StackPane baseLayout = new StackPane();
 		baseLayout.prefWidthProperty().bind(stage.widthProperty());
@@ -297,7 +291,6 @@ public class UIManager {
 		coffeeLayer.setAlignment(Pos.CENTER);
 		coffeeLayer.prefWidthProperty().bind(stage.widthProperty());
 		coffeeLayer.prefHeightProperty().bind(stage.heightProperty());
-
 		coffeeLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
 			    "-fx-background-image: url('file:resources/pictures/coffeeMenuBackground.png'); " +
@@ -368,7 +361,6 @@ public class UIManager {
 
 		tripLayer.prefWidthProperty().bind(stage.widthProperty());
 		tripLayer.prefHeightProperty().bind(stage.heightProperty());
-		
 		tripLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
 			    "-fx-background-image: url('file:resources/pictures/tripMenuBackground.png'); " +
@@ -439,7 +431,6 @@ public class UIManager {
 
 		strokeCatLayer.prefWidthProperty().bind(stage.widthProperty());
 		strokeCatLayer.prefHeightProperty().bind(stage.heightProperty());
-		
 		strokeCatLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
 			    "-fx-background-image: url('file:resources/pictures/catMenuBackground.png'); " +
@@ -511,7 +502,6 @@ public class UIManager {
 		beatLayer.prefWidthProperty().bind(stage.widthProperty());
 		beatLayer.prefHeightProperty().bind(stage.heightProperty());
 		beatLayer.setStyle("-fx-background-color: #FFD1DC;");
-		
 		beatLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
 			    "-fx-background-image: url('file:resources/pictures/beatMenuBackground.png'); " +
@@ -582,7 +572,6 @@ public class UIManager {
 
 		hugLayer.prefWidthProperty().bind(stage.widthProperty());
 		hugLayer.prefHeightProperty().bind(stage.heightProperty());
-		
 		hugLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
 			    "-fx-background-image: url('file:resources/pictures/hugMenuBackground.png'); " +
@@ -613,16 +602,16 @@ public class UIManager {
 		StackPane.setAlignment(waterLab, Pos.TOP_CENTER);
 		waterLab.setPadding(new Insets(175, 0, 0, 0));
 		
-		double baslangicHedefi = configManager.getDailyWaterAim();
-		if (baslangicHedefi <= 0) {
-		    baslangicHedefi = 2000.0;
-		    configManager.setDailyWaterAim(2000.0); // Config'i de düzeltiyoruz
+		double beginningAim = configManager.getDailyWaterAim();
+		if (beginningAim <= 0) {
+			beginningAim = 2000.0;
+		    configManager.setDailyWaterAim(2000.0);
 		}
 		
 		TextField aimInfo = new TextField();
-		aimInfo.setText(String.valueOf(baslangicHedefi));
-		aimInfo.setMaxWidth(80); // Kutunun genişliğini kısıtlıyoruz ki çok uzun olmasın
-		aimInfo.setAlignment(Pos.CENTER); // Yazıyı ortalıyoruz
+		aimInfo.setText(String.valueOf(beginningAim));
+		aimInfo.setMaxWidth(80); // Kutunun genişliğini kısıtla
+		aimInfo.setAlignment(Pos.CENTER); // Yazıyı ortala
 		aimInfo.setStyle("-fx-background-color: #ffffff; -fx-border-color: #b18597; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-font-weight: bold;");
 		aimInfo.setTranslateY(-150);
 
@@ -798,7 +787,6 @@ public class UIManager {
 		waterLayer.setAlignment(Pos.CENTER);
 		waterLayer.prefWidthProperty().bind(stage.widthProperty());
 		waterLayer.prefHeightProperty().bind(stage.heightProperty());
-		
 		waterLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
 			    "-fx-background-image: url('file:resources/pictures/waterMenuBackground.png'); " +
@@ -866,9 +854,9 @@ public class UIManager {
 	    
 	    Label msgLabel = new Label(message);
 	    
-	    // YENİ EKLENEN KISIM: Alt satıra geçme ve ortalama ayarları
+	    // Alt satıra geçme ve ortalama ayarları
 	    msgLabel.setWrapText(true); // Metin kutuya sığmazsa alt satıra geç
-	    msgLabel.setMaxWidth(560);  // 600'lük kutunun kenarlarında 20'şer piksel boşluk kalsın
+	    msgLabel.setMaxWidth(560);
 	    msgLabel.setTextAlignment(TextAlignment.CENTER);
 	    msgLabel.setLineSpacing(-25);
 	    msgLabel.setTranslateY(15);
@@ -907,7 +895,7 @@ public class UIManager {
 	    
 	    // Zincirleme animasyon: Ekrana gir -> 5 saniye bekle -> Ekrandan çık
 	    slideIn.setOnFinished(e -> {
-	        Timeline wait = new Timeline(new KeyFrame(Duration.seconds(5)));
+	        Timeline wait = new Timeline(new KeyFrame(Duration.seconds(10)));
 	        wait.setOnFinished(ev -> slideOut.play());
 	        wait.play();
 	    });
@@ -1089,8 +1077,6 @@ public class UIManager {
 	        buttonShadow.setOffsetY(8);
 	    });
 	}
-
-
 	
 	private void applyRectangleStyle(Rectangle rect) {
 	    // 1. Arka Plan Gradient (Doğrusal Renk Geçişi)
@@ -1118,5 +1104,4 @@ public class UIManager {
 	    dropShadow.setOffsetY(8);
 	    rect.setEffect(dropShadow);
 	}
-
 }
