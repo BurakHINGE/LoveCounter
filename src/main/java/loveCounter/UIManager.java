@@ -847,7 +847,6 @@ public class UIManager {
 		    configManager.saveConfig();
 		    switchScene(startApp());
 		});
-
 		
 		return returnMainMenuPane;
 	}

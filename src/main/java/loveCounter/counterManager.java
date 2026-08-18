@@ -13,9 +13,15 @@ public class counterManager {
             count.setText(String.valueOf(configManager.getCoffeeCount()));
         });
 		decrease.setOnMouseClicked(e -> {
-
-            configManager.setCoffeeCount(configManager.getCoffeeCount() - 1);
-            count.setText(String.valueOf(configManager.getCoffeeCount()));
+			
+			if (configManager.getCoffeeCount() == 0) {
+				configManager.setCoffeeCount(0);
+				count.setText(String.valueOf(configManager.getCoffeeCount()));
+			}
+			else {
+	            configManager.setCoffeeCount(configManager.getCoffeeCount() - 1);
+	            count.setText(String.valueOf(configManager.getCoffeeCount()));
+			}
         });
 	}
 	
@@ -28,8 +34,14 @@ public class counterManager {
         });
 		decrease.setOnMouseClicked(e -> {
 
-            configManager.setTripCount(configManager.getTripCount() - 1);
-            count.setText(String.valueOf(configManager.getTripCount()));
+			if (configManager.getTripCount() == 0) {
+				configManager.setTripCount(0);
+				count.setText(String.valueOf(configManager.getTripCount()));
+			}
+			else {
+	            configManager.setTripCount(configManager.getTripCount() - 1);
+	            count.setText(String.valueOf(configManager.getTripCount()));
+			}
         });
 	}
 
@@ -42,8 +54,14 @@ public class counterManager {
         });
 		decrease.setOnMouseClicked(e -> {
 
-            configManager.setStrokeCatCount(configManager.getStrokeCatCount() - 1);
-            count.setText(String.valueOf(configManager.getStrokeCatCount()));
+			if (configManager.getStrokeCatCount() == 0) {
+				configManager.setStrokeCatCount(0);
+				count.setText(String.valueOf(configManager.getStrokeCatCount()));
+			}
+			else {
+	            configManager.setStrokeCatCount(configManager.getStrokeCatCount() - 1);
+	            count.setText(String.valueOf(configManager.getStrokeCatCount()));
+			}
         });
 	}
 
@@ -56,8 +74,14 @@ public class counterManager {
         });
 		decrease.setOnMouseClicked(e -> {
 
-			configManager.setBeatCount(configManager.getBeatCount() - 1);
-            count.setText(String.valueOf(configManager.getBeatCount()));
+			if (configManager.getBeatCount() == 0) {
+				configManager.setBeatCount(0);
+				count.setText(String.valueOf(configManager.getBeatCount()));
+			}
+			else {
+	            configManager.setBeatCount(configManager.getBeatCount() - 1);
+	            count.setText(String.valueOf(configManager.getBeatCount()));
+			}
         });
 	}
 	
@@ -70,8 +94,14 @@ public class counterManager {
         });
 		decrease.setOnMouseClicked(e -> {
 
-            configManager.setHugCount(configManager.getHugCount() - 1);
-            count.setText(String.valueOf(configManager.getHugCount()));
+			if (configManager.getHugCount() == 0) {
+				configManager.setHugCount(0);
+				count.setText(String.valueOf(configManager.getHugCount()));
+			}
+			else {
+	            configManager.setHugCount(configManager.getHugCount() - 1);
+	            count.setText(String.valueOf(configManager.getHugCount()));
+			}
         });
 	}
 	
@@ -83,9 +113,15 @@ public class counterManager {
             count.setText(String.valueOf(configManager.getWaterCount()));
         });
 		dec1.setOnMouseClicked(e -> {
-
-            configManager.setWaterCount(configManager.getWaterCount() - 100);
-            count.setText(String.valueOf(configManager.getWaterCount()));
+			
+			if (configManager.getWaterCount() < 100) {
+				configManager.setWaterCount(0);
+				count.setText(String.valueOf(configManager.getWaterCount()));
+			}
+			else {
+	            configManager.setWaterCount(configManager.getWaterCount() - 100);
+	            count.setText(String.valueOf(configManager.getWaterCount()));
+			}
         });
 		inc2.setOnMouseClicked(e -> {
 
@@ -94,8 +130,14 @@ public class counterManager {
         });
 		dec2.setOnMouseClicked(e -> {
 
-            configManager.setWaterCount(configManager.getWaterCount() - 200);
-            count.setText(String.valueOf(configManager.getWaterCount()));
+			if (configManager.getWaterCount() < 200) {
+				configManager.setWaterCount(0);
+				count.setText(String.valueOf(configManager.getWaterCount()));
+			}
+			else {
+	            configManager.setWaterCount(configManager.getWaterCount() - 200);
+	            count.setText(String.valueOf(configManager.getWaterCount()));
+			}
         });
 		inc3.setOnMouseClicked(e -> {
 
@@ -104,8 +146,14 @@ public class counterManager {
         });
 		dec3.setOnMouseClicked(e -> {
 
-            configManager.setWaterCount(configManager.getWaterCount() - 500);
-            count.setText(String.valueOf(configManager.getWaterCount()));
+			if (configManager.getWaterCount() < 500) {
+				configManager.setWaterCount(0);
+				count.setText(String.valueOf(configManager.getWaterCount()));
+			}
+			else {
+	            configManager.setWaterCount(configManager.getWaterCount() - 500);
+	            count.setText(String.valueOf(configManager.getWaterCount()));
+			}
         });
 		inc4.setOnMouseClicked(e -> {
 
@@ -114,8 +162,14 @@ public class counterManager {
         });
 		dec4.setOnMouseClicked(e -> {
 
-            configManager.setWaterCount(configManager.getWaterCount() - 1000);
-            count.setText(String.valueOf(configManager.getWaterCount()));
+			if (configManager.getWaterCount() < 1000) {
+				configManager.setWaterCount(0);
+				count.setText(String.valueOf(configManager.getWaterCount()));
+			}
+			else {
+	            configManager.setWaterCount(configManager.getWaterCount() - 1000);
+	            count.setText(String.valueOf(configManager.getWaterCount()));
+			}
         });
 	}
 }
