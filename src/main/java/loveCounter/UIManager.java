@@ -26,6 +26,7 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -59,6 +60,9 @@ public class UIManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        WaterReminderManager waterManager = new WaterReminderManager(this::showWaterReminder);
+        waterManager.startWaterCheckTimer();
     }
 	
 	public Scene startApp() {
@@ -854,6 +858,63 @@ public class UIManager {
 	private void showLayer(StackPane newLayer) {
         rootLayer.getChildren().add(newLayer);
     }
+	
+	public void showWaterReminder(String message) {
+	    // İnce uzun arka plan kutusu
+		Rectangle bgRect = new Rectangle(600, 100);
+	    applyRectangleStyle(bgRect); 
+	    
+	    Label msgLabel = new Label(message);
+	    
+	    // YENİ EKLENEN KISIM: Alt satıra geçme ve ortalama ayarları
+	    msgLabel.setWrapText(true); // Metin kutuya sığmazsa alt satıra geç
+	    msgLabel.setMaxWidth(560);  // 600'lük kutunun kenarlarında 20'şer piksel boşluk kalsın
+	    msgLabel.setTextAlignment(TextAlignment.CENTER);
+	    msgLabel.setLineSpacing(-25);
+	    msgLabel.setTranslateY(15);
+	    msgLabel.styleProperty().bind(Bindings.concat(
+	        "-fx-font-family: '", customFontFamily, "'; ",
+	        "-fx-font-size: 24px; ",
+	        "-fx-text-fill: #422800; ", 
+	        "-fx-font-weight: bold;"
+	    ));
+	    
+	    // Yazı ve arka planı üst üste koy
+	    StackPane notificationPane = new StackPane(bgRect, msgLabel);
+	    notificationPane.setMaxSize(StackPane.USE_PREF_SIZE, StackPane.USE_PREF_SIZE);
+	    StackPane.setAlignment(notificationPane, Pos.TOP_CENTER);
+	    StackPane.setMargin(notificationPane, new Insets(40, 0, 0, 0)); // Üstten biraz boşluk
+	    notificationPane.setPickOnBounds(false);
+	    
+	    // Animasyon için başlangıç noktası (ekranın üstünün tamamen dışı)
+	    notificationPane.setTranslateY(-150);
+	    
+	    // Kutuyu ana ekranın (rootLayer) en üstüne ekle
+	    rootLayer.getChildren().add(notificationPane);
+	    
+	    // Ekrana kayarak girme animasyonu
+	    Timeline slideIn = new Timeline(
+	        new KeyFrame(Duration.millis(700), new KeyValue(notificationPane.translateYProperty(), 0, Interpolator.EASE_OUT))
+	    );
+	    
+	    // Ekrandan kayarak çıkma animasyonu
+	    Timeline slideOut = new Timeline(
+	        new KeyFrame(Duration.millis(700), new KeyValue(notificationPane.translateYProperty(), -150, Interpolator.EASE_IN))
+	    );
+	    
+	    // Çıktıktan sonra bellekte yer kaplamaması için ekrandan sil
+	    slideOut.setOnFinished(e -> rootLayer.getChildren().remove(notificationPane));
+	    
+	    // Zincirleme animasyon: Ekrana gir -> 5 saniye bekle -> Ekrandan çık
+	    slideIn.setOnFinished(e -> {
+	        Timeline wait = new Timeline(new KeyFrame(Duration.seconds(5)));
+	        wait.setOnFinished(ev -> slideOut.play());
+	        wait.play();
+	    });
+	    
+	    slideIn.play();
+	}
+
 	
 	private void applyRetroStyle(Button button) {
 
