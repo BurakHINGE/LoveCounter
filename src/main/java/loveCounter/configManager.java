@@ -20,10 +20,35 @@ public class configManager {
 	private static double dailyWaterAim;
 	private static String lastLoginDate;
 	
+	private static File getConfigFile() {
+		String os = System.getProperty("os.name").toLowerCase();
+		String userHome = System.getProperty("user.home");
+		String dataFolder;
+
+		if (os.contains("win")) {
+			// Windows ise AppData klasörünü kullan
+			dataFolder = System.getenv("APPDATA") + File.separator + "LoveCounter";
+		} else if (os.contains("mac")) {
+			// Mac ise Application Support klasörünü kullan
+			dataFolder = userHome + "/Library/Application Support/LoveCounter";
+		} else {
+			// Diğer sistemler için (Linux vb.) gizli klasör
+			dataFolder = userHome + File.separator + ".LoveCounter";
+		}
+
+		File dir = new File(dataFolder);
+		// Eğer klasör daha önce hiç oluşturulmamışsa, otomatik olarak oluştur.
+		if (!dir.exists()) {
+			dir.mkdirs(); 
+		}
+
+		return new File(dir, "config.txt");
+	}
+	
 	public void loadConfig() {
 		try {
 			
-			File config = new File("data/config.txt");
+			File config = getConfigFile();
 			Scanner output = new Scanner(config);
 			output.useLocale(Locale.US);
 			
@@ -74,7 +99,7 @@ public class configManager {
 	public static void saveConfig() {
         try {
         	
-            FileWriter fileWriter = new FileWriter("data/config.txt");
+        	FileWriter fileWriter = new FileWriter(getConfigFile());
             PrintWriter printWriter = new PrintWriter(fileWriter);
             
             printWriter.println("coffee_count: " + coffeeCount);
@@ -87,7 +112,7 @@ public class configManager {
             printWriter.println("last_login_date: " + lastLoginDate);
             
             printWriter.close();
-            System.out.println("Veriler config.txt dosyasına başarıyla kaydedildi.");
+            System.out.println("Veriler başarıyla kaydedildi. Konum: " + getConfigFile().getAbsolutePath());
             
         } catch (IOException e) {
             System.out.println("Warning: config.txt file cannot write! Please check permissions.");

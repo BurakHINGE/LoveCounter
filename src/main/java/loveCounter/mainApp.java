@@ -16,6 +16,7 @@ public class mainApp extends Application {
 		UIManager primaryScene = new UIManager(primaryStage);
 		primaryStage.setScene(primaryScene.startApp());
 		primaryStage.setTitle("LOVE APP");
+		UpdateManager.checkForUpdates();
 		primaryStage.show();
 		
 	}
