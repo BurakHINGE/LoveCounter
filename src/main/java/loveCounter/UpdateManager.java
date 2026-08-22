@@ -24,9 +24,11 @@ public class UpdateManager {
         // İnternet kontrolü uygulamanın açılışını dondurmasın diye arka planda (Thread) çalıştırıyoruz
         new Thread(() -> {
             try {
+            	String noCacheUrl = VERSION_URL + "?t=" + System.currentTimeMillis();
+                
                 HttpClient client = HttpClient.newHttpClient();
                 HttpRequest request = HttpRequest.newBuilder()
-                        .uri(URI.create(VERSION_URL))
+                        .uri(URI.create(noCacheUrl))
                         .build();
 
                 // İnternetteki dosyayı oku
