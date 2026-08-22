@@ -3,6 +3,8 @@ package loveCounter;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import java.io.File;
+import java.io.PrintWriter;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -59,7 +61,47 @@ public class UpdateManager {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == buttonYes) {
             System.out.println("Onay verildi! İndirme scripti tetiklenecek...");
-            // TODO: 2. Aşama - guncelle.bat oluşturma ve uygulamayı kapatma kodları buraya gelecek!
+            startUpdateProcess();
+        }
+
+    }
+    
+    private static void startUpdateProcess() {
+        // İndirilecek güncel zip dosyasının DOĞRUDAN linki (Bunu ayarlayacağız)
+    	String zipUrl = "https://github.com/BurakHINGE/LoveCounter/releases/latest/download/LoveCounter-Windows-Paketi.zip";
+        
+        try {
+            // Arka planda çalışacak Windows scriptini (Bat) oluşturuyoruz
+            File batFile = new java.io.File("guncelle.bat");
+            PrintWriter writer = new java.io.PrintWriter(batFile);
+            
+            writer.println("@echo off");
+            writer.println("echo Guncelleme indiriliyor, lutfen bekleyin...");
+            // Java'nın kapanması için 2 saniye bekle
+            writer.println("timeout /t 2 /nobreak > NUL"); 
+            // Yeni zip dosyasını indir
+            writer.println("curl -L -o guncelleme.zip \"" + zipUrl + "\""); 
+            writer.println("echo Dosyalar cikariliyor...");
+            // Zip dosyasını klasöre çıkart (eski dosyaların üzerine yazar)
+            writer.println("tar -xf guncelleme.zip"); 
+            writer.println("echo Guncelleme tamamlandi! Yeniden baslatiliyor...");
+            // Kalıntıları temizle
+            writer.println("del guncelleme.zip");
+            // Uygulamayı tekrar başlat
+            writer.println("start LoveCounter.bat"); 
+            // Kendi kendini sil
+            writer.println("del \"%~f0\""); 
+            
+            writer.close();
+
+            // Oluşturduğumuz bat dosyasını çalıştır
+            Runtime.getRuntime().exec("cmd /c start guncelle.bat");
+            
+            // Programı anında kapat!
+            System.exit(0);
+            
+        } catch (Exception e) {
+            System.out.println("Güncelleme scripti oluşturulamadı: " + e.getMessage());
         }
     }
 }
