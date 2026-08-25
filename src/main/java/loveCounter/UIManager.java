@@ -858,6 +858,7 @@ public class UIManager {
 	    msgLabel.setWrapText(true); // Metin kutuya sığmazsa alt satıra geç
 	    msgLabel.setMaxWidth(560);
 	    msgLabel.setTextAlignment(TextAlignment.CENTER);
+	    msgLabel.setAlignment(Pos.CENTER);
 	    msgLabel.setLineSpacing(-25);
 	    msgLabel.setTranslateY(15);
 	    msgLabel.styleProperty().bind(Bindings.concat(
