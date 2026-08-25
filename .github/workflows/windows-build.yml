@@ -1,9 +1,9 @@
-name: Build Windows App
+name: Build and Release Windows App
 
 on:
-  push:
-    branches: [ "main" ]
-  workflow_dispatch:
+  release:
+    types: [created] # Sadece yeni bir Release yayınladığında otomatik başlar
+  workflow_dispatch: # İstersen Actions sekmesinden elle tetikleme butonu kalsın
 
 jobs:
   build-windows:
@@ -22,8 +22,14 @@ jobs:
     - name: Maven ve jlink ile Windows Paketi Üret
       run: mvn clean javafx:jlink
 
-    - name: Derlenen Paketi Artifact Olarak Yükle
-      uses: actions/upload-artifact@v4
-      with:
-        name: LoveCounter-Windows-Paketi
-        path: target/LoveCounter/
+    - name: Derlenen Paketi Zip'le
+      run: |
+        # target\LoveCounter içindeki dosyaları alıp LoveCounter-Windows-Paketi.zip yapar
+        Compress-Archive -Path target\LoveCounter\* -DestinationPath LoveCounter-Windows-Paketi.zip
+
+    - name: Zip Dosyasını Release'e (Assets) Yükle
+      if: github.event_name == 'release'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # gh (GitHub CLI) aracı ile tag ismine uygun release'in içine zip dosyasını atar
+      run: gh release upload ${{ github.event.release.tag_name }} LoveCounter-Windows-Paketi.zip
