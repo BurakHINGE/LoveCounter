@@ -2,8 +2,6 @@ package loveCounter;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import loveCounter.UIManager;
-import loveCounter.configManager;
 
 public class mainApp extends Application {
 	
