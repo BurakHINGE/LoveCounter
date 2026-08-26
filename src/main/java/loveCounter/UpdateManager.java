@@ -14,7 +14,7 @@ import java.util.Optional;
 public class UpdateManager {
     
     // Uygulamanın o anki mevcut sürümü
-    private static final String CURRENT_VERSION = "v1.0.2";
+    private static final String CURRENT_VERSION = "v1.0.3";
     
     // GitHub'da tutacağın basit metin dosyasının kalıcı (raw) linki
     // (Bunu birazdan birlikte ayarlayacağız, şimdilik böyle kalabilir)
