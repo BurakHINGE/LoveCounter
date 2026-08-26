@@ -5,6 +5,10 @@ on:
     types: [created] # Sadece yeni bir Release yayınladığında otomatik başlar
   workflow_dispatch: # İstersen Actions sekmesinden elle tetikleme butonu kalsın
 
+# İŞTE BURAYA EKLİYORUZ: GitHub Token'ına yazma izni veriyoruz
+permissions:
+  contents: write
+
 jobs:
   build-windows:
     runs-on: windows-latest
