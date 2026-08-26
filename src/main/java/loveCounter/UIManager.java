@@ -40,12 +40,12 @@ public class UIManager {
         this.rootLayer = new StackPane();
         this.rootLayer.setStyle("-fx-background-color: #FFD1DC;"); // Fix background color
         
-        String fontPath = "file:resources/fonts/Minecraftia-Regular.ttf";
+        String fontPath = "file:resources/loveCounter/fonts/Minecraftia-Regular.ttf";
 
         // Load Font
         try {
             // Projenin resources klasörünün içindeki yolu "/" ile başlatarak veriyoruz
-            Font loadedFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Minecraftia-Regular.ttf"), 14);
+            Font loadedFont = Font.loadFont(getClass().getResourceAsStream("/loveCounter/fonts/Minecraftia-Regular.ttf"), 14);
             if (loadedFont != null) {
                 customFontFamily = loadedFont.getFamily();
                 System.out.println("Font başarıyla yüklendi: " + customFontFamily);
@@ -86,7 +86,7 @@ public class UIManager {
 		
 		baseLayout.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
-			    "-fx-background-image: url('" + getImageUrl("/pictures/mainMenuBackground.png") + "'); " +
+			    "-fx-background-image: url('" + getImageUrl("/loveCounter/pictures/mainMenuBackground.png") + "'); " +
 			    "-fx-background-size: cover; " +
 			    "-fx-background-position: center;"
 			);
@@ -294,7 +294,7 @@ public class UIManager {
 		coffeeLayer.prefHeightProperty().bind(stage.heightProperty());
 		coffeeLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
-			    "-fx-background-image: url('" + getClass().getResource("/pictures/coffeeMenuBackground.png").toExternalForm() + "'); " +
+			    "-fx-background-image: url('" + getClass().getResource("/loveCounter/pictures/coffeeMenuBackground.png").toExternalForm() + "'); " +
 			    "-fx-background-size: cover; " +
 			    "-fx-background-position: center;"
 			);
@@ -364,7 +364,7 @@ public class UIManager {
 		tripLayer.prefHeightProperty().bind(stage.heightProperty());
 		tripLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
-			    "-fx-background-image: url('" + getClass().getResource("/pictures/tripMenuBackground.png").toExternalForm() + "'); " +
+			    "-fx-background-image: url('" + getClass().getResource("/loveCounter/pictures/tripMenuBackground.png").toExternalForm() + "'); " +
 			    "-fx-background-size: cover; " +
 			    "-fx-background-position: center;"
 			);
@@ -434,7 +434,7 @@ public class UIManager {
 		strokeCatLayer.prefHeightProperty().bind(stage.heightProperty());
 		strokeCatLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
-			    "-fx-background-image: url('" + getClass().getResource("/pictures/catMenuBackground.png").toExternalForm() + "'); " +
+			    "-fx-background-image: url('" + getClass().getResource("/loveCounter/pictures/catMenuBackground.png").toExternalForm() + "'); " +
 			    "-fx-background-size: cover; " +
 			    "-fx-background-position: center;"
 			);
@@ -505,7 +505,7 @@ public class UIManager {
 		beatLayer.setStyle("-fx-background-color: #FFD1DC;");
 		beatLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
-			    "-fx-background-image: url('" + getClass().getResource("/pictures/beatMenuBackground.png").toExternalForm() + "'); " +
+			    "-fx-background-image: url('" + getClass().getResource("/loveCounter/pictures/beatMenuBackground.png").toExternalForm() + "'); " +
 			    "-fx-background-size: cover; " +
 			    "-fx-background-position: center;"
 			);
@@ -575,7 +575,7 @@ public class UIManager {
 		hugLayer.prefHeightProperty().bind(stage.heightProperty());
 		hugLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
-			    "-fx-background-image: url('" + getClass().getResource("/pictures/hugMenuBackground.png").toExternalForm() + "'); " +
+			    "-fx-background-image: url('" + getClass().getResource("/loveCounter/pictures/hugMenuBackground.png").toExternalForm() + "'); " +
 			    "-fx-background-size: cover; " +
 			    "-fx-background-position: center;"
 			);
@@ -790,7 +790,7 @@ public class UIManager {
 		waterLayer.prefHeightProperty().bind(stage.heightProperty());
 		waterLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
-			    "-fx-background-image: url('" + getClass().getResource("/pictures/waterMenuBackground.png").toExternalForm() + "'); " +
+			    "-fx-background-image: url('" + getClass().getResource("/loveCounter/pictures/waterMenuBackground.png").toExternalForm() + "'); " +
 			    "-fx-background-size: cover; " +
 			    "-fx-background-position: center;"
 			);

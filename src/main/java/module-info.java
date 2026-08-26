@@ -4,6 +4,6 @@ module loveCounter {
     requires transitive javafx.graphics;
     requires java.net.http;
     
-    opens loveCounter to javafx.fxml;
+    opens loveCounter to javafx.fxml, javafx.graphics;
     exports loveCounter;
 }
