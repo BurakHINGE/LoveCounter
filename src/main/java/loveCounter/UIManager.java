@@ -44,12 +44,13 @@ public class UIManager {
 
         // Load Font
         try {
-            Font loadedFont = Font.loadFont(fontPath, 14);
+            // Projenin resources klasörünün içindeki yolu "/" ile başlatarak veriyoruz
+            Font loadedFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Minecraftia-Regular.ttf"), 14);
             if (loadedFont != null) {
                 customFontFamily = loadedFont.getFamily();
-                System.out.println("Font has been uploaded successfuly: " + customFontFamily);
+                System.out.println("Font başarıyla yüklendi: " + customFontFamily);
             } else {
-                System.out.println("Font cannot be found: " + fontPath);
+                System.out.println("Font bulunamadı veya yüklenemedi!");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,7 +86,7 @@ public class UIManager {
 		
 		baseLayout.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
-			    "-fx-background-image: url('file:resources/pictures/mainMenuBackground.png'); " +
+			    "-fx-background-image: url('" + getImageUrl("/pictures/mainMenuBackground.png") + "'); " +
 			    "-fx-background-size: cover; " +
 			    "-fx-background-position: center;"
 			);
@@ -293,7 +294,7 @@ public class UIManager {
 		coffeeLayer.prefHeightProperty().bind(stage.heightProperty());
 		coffeeLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
-			    "-fx-background-image: url('file:resources/pictures/coffeeMenuBackground.png'); " +
+			    "-fx-background-image: url('" + getClass().getResource("/pictures/coffeeMenuBackground.png").toExternalForm() + "'); " +
 			    "-fx-background-size: cover; " +
 			    "-fx-background-position: center;"
 			);
@@ -363,7 +364,7 @@ public class UIManager {
 		tripLayer.prefHeightProperty().bind(stage.heightProperty());
 		tripLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
-			    "-fx-background-image: url('file:resources/pictures/tripMenuBackground.png'); " +
+			    "-fx-background-image: url('" + getClass().getResource("/pictures/tripMenuBackground.png").toExternalForm() + "'); " +
 			    "-fx-background-size: cover; " +
 			    "-fx-background-position: center;"
 			);
@@ -433,7 +434,7 @@ public class UIManager {
 		strokeCatLayer.prefHeightProperty().bind(stage.heightProperty());
 		strokeCatLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
-			    "-fx-background-image: url('file:resources/pictures/catMenuBackground.png'); " +
+			    "-fx-background-image: url('" + getClass().getResource("/pictures/catMenuBackground.png").toExternalForm() + "'); " +
 			    "-fx-background-size: cover; " +
 			    "-fx-background-position: center;"
 			);
@@ -504,7 +505,7 @@ public class UIManager {
 		beatLayer.setStyle("-fx-background-color: #FFD1DC;");
 		beatLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
-			    "-fx-background-image: url('file:resources/pictures/beatMenuBackground.png'); " +
+			    "-fx-background-image: url('" + getClass().getResource("/pictures/beatMenuBackground.png").toExternalForm() + "'); " +
 			    "-fx-background-size: cover; " +
 			    "-fx-background-position: center;"
 			);
@@ -574,7 +575,7 @@ public class UIManager {
 		hugLayer.prefHeightProperty().bind(stage.heightProperty());
 		hugLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
-			    "-fx-background-image: url('file:resources/pictures/hugMenuBackground.png'); " +
+			    "-fx-background-image: url('" + getClass().getResource("/pictures/hugMenuBackground.png").toExternalForm() + "'); " +
 			    "-fx-background-size: cover; " +
 			    "-fx-background-position: center;"
 			);
@@ -789,7 +790,7 @@ public class UIManager {
 		waterLayer.prefHeightProperty().bind(stage.heightProperty());
 		waterLayer.setStyle(
 			    "-fx-background-color: #FFD1DC; " +
-			    "-fx-background-image: url('file:resources/pictures/waterMenuBackground.png'); " +
+			    "-fx-background-image: url('" + getClass().getResource("/pictures/waterMenuBackground.png").toExternalForm() + "'); " +
 			    "-fx-background-size: cover; " +
 			    "-fx-background-position: center;"
 			);
@@ -846,6 +847,12 @@ public class UIManager {
 	private void showLayer(StackPane newLayer) {
         rootLayer.getChildren().add(newLayer);
     }
+	
+	// Resim yolunu paketlenmiş formata çeviren yardımcı metot
+	private String getImageUrl(String imagePath) {
+	    return getClass().getResource(imagePath).toExternalForm();
+	}
+
 	
 	public void showWaterReminder(String message) {
 	    // İnce uzun arka plan kutusu

@@ -69,30 +69,34 @@ public class UpdateManager {
     }
     
     private static void startUpdateProcess() {
-        // İndirilecek güncel zip dosyasının DOĞRUDAN linki (Bunu ayarlayacağız)
-    	String zipUrl = "https://github.com/BurakHINGE/LoveCounter/releases/latest/download/LoveCounter-Windows-Paketi.zip";
+        String zipUrl = "https://github.com/BurakHINGE/LoveCounter/releases/latest/download/LoveCounter-Windows-Paketi.zip";
         
         try {
-            // Arka planda çalışacak Windows scriptini (Bat) oluşturuyoruz
             File batFile = new java.io.File("guncelle.bat");
             PrintWriter writer = new java.io.PrintWriter(batFile);
             
             writer.println("@echo off");
-            writer.println("echo Guncelleme indiriliyor, lutfen bekleyin...");
-            // Java'nın kapanması için 2 saniye bekle
-            writer.println("timeout /t 2 /nobreak > NUL"); 
+            writer.println("echo Guncelleme indiriliyor, uygulamanin kapanmasi bekleniyor...");
+            
+            // Java'nın ve dosyaların kilidinin tamamen serbest kalması için 4 saniye bekle
+            writer.println("timeout /t 4 /nobreak > NUL"); 
+            
             // Yeni zip dosyasını indir
             writer.println("curl -L -o guncelleme.zip \"" + zipUrl + "\""); 
             writer.println("echo Dosyalar cikariliyor...");
-            // Zip dosyasını klasöre çıkart (eski dosyaların üzerine yazar)
+            
+            // Zip dosyasını mevcut klasöre çıkart (eski dosyaların üzerine yazar)
             writer.println("tar -xf guncelleme.zip"); 
             writer.println("echo Guncelleme tamamlandi! Yeniden baslatiliyor...");
-            // Kalıntıları temizle
+            
+            // Kalıntı zip dosyasını temizle
             writer.println("del guncelleme.zip");
-            // Uygulamayı tekrar başlat
-            writer.println("start LoveCounter.bat"); 
-            // Kendi kendini sil
-            writer.println("del \"%~f0\""); 
+            
+            // Uygulamayı güvenli bir şekilde (yeni bir pencere olarak) tekrar başlat
+            writer.println("start \"\" \"LoveCounter.bat\""); 
+            
+            // Bat dosyasının kendi kendini HATA VERMEDEN silmesini sağla
+            writer.println("(goto) 2>nul & del \"%~f0\""); 
             
             writer.close();
 
@@ -106,5 +110,6 @@ public class UpdateManager {
             System.out.println("Güncelleme scripti oluşturulamadı: " + e.getMessage());
         }
     }
+
 }
 
